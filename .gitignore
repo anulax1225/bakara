@@ -1,0 +1,6 @@
+bin/
+bin-int/
+.vscode/
+.vs/
+**.sln
+**Makefile
