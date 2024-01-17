@@ -1,6 +1,3 @@
-[submodule "bakara/vendor/spdloglib"]
-	path = bakara/vendor/spdloglib
-	url = https://github.com/gabime/spdlog
 [submodule "bakara/vendor/glm"]
 	path = bakara/vendor/glm
 	url = https://github.com/g-truc/glm.git
