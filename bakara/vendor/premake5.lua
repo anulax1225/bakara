@@ -1,5 +1,5 @@
 project "glm"
-    location "glm"
+    location "glm/glm"
     kind "StaticLib"
     language "C++"
     cppdialect "C++17"
@@ -10,12 +10,12 @@ project "glm"
 
     files 
     {
-        "glm/**.hpp",
-        "glm/**.inl",
-        "glm/**.cpp"
+        "%{prj.location}/**.hpp",
+        "%{prj.location}/**.inl",
+        "%{prj.location}/**.cpp"
     }
 
     includedirs 
     {
-        "%{wks.location}/bakara/vendor"
+        "%{IncludeDirs.glm}"
     }

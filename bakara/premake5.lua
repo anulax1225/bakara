@@ -15,8 +15,9 @@ project "bakara"
 
     includedirs 
     {
-        "src",
-        "vendor"
+        "%{IncludeDirs.bakara}",
+        "%{IncludeDirs.glm}",
+        "%{IncludeDirs.spdlog}"
     }
 
     links 

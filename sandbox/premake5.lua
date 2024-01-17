@@ -16,8 +16,8 @@ project "sandbox"
 
     includedirs 
     {
-        "%{wks.location}/bakara/vendor",
-        "%{wks.location}/bakara/src"
+        "%{IncludeDirs.bakara}",
+        "%{IncludeDirs.spdlog}"
     }
 
     links 
