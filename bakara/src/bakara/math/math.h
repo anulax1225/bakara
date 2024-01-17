@@ -1,3 +1,3 @@
 #pragma once
 
-#include "vec.h"
+#include "type.h"
