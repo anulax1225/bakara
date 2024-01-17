@@ -1,2 +1,3 @@
 #pragma once
-#include "bakara/math/math.h"
+#include <bakara/math/type.h>
+#include <bakara/core/log.h>
