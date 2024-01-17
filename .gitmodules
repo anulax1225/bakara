@@ -1,0 +1,3 @@
+[submodule "bakara/vendor/spdlog"]
+	path = bakara/vendor/spdlog
+	url = https://github.com/gabime/spdlog
