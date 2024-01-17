@@ -1,50 +1,22 @@
 workspace "Bakara"
     architecture "x64"
     configurations { "Debug", "Release" }
-    startproject "Sandbox"
+    startproject "sandbox"
 
     outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
-project "Bakara"
-    location "bakara"
-    kind "StaticLib"
-    language "C++"
+group "Dependencies"
+    include "bakara/vendor"
+group ""
 
-    targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+group "Core"
+	include "bakara"
+group ""
 
-    files 
-    {
-        "%{prj.location}/src/**.hpp",
-        "%{prj.location}/src/**.cpp",
-    }
+group "App"
+	include "sandbox"
+group ""
 
-project "Sandbox"
-    location "sandbox"
-    kind "ConsoleApp"
-    language "C++"
-    cppdialect "C++17"
-    staticruntime "on"
-    systemversion "latest"
-
-    targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
-
-    files 
-    {
-        "%{prj.location}/src/**.hpp",
-        "%{prj.location}/src/**.cpp",
-    }
-
-    includedirs 
-    {
-        "%{wks.location}/bakara/src",
-    }
-
-    links 
-    {
-        "Bakara"
-    }
 
 
 
