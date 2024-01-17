@@ -1,5 +1,5 @@
 project "glm"
-    location "glm/glm"
+    location "./glm/glm"
     kind "StaticLib"
     language "C++"
     cppdialect "C++17"

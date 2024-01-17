@@ -17,7 +17,8 @@ project "sandbox"
     includedirs 
     {
         "%{IncludeDirs.bakara}",
-        "%{IncludeDirs.spdlog}"
+        "%{IncludeDirs.spdlog}",
+        "%{IncludeDirs.glm}"
     }
 
     links 
