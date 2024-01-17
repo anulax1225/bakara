@@ -1,7 +1,7 @@
 bin/
 bin-int/
-**/vendor
 .vscode/
 .vs/
 **.sln
 **Makefile
+**.vcxproj
