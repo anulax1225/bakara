@@ -8,7 +8,9 @@ class Sandbox : public Bk::Application
     public:
         Sandbox() 
         {
-            
+            auto event = Bk::WindowResizeEvent(120, 120);
+            auto key_event = Bk::KeyPressEvent(Bk::Key::A);
+            std::cout << event.to_string() << "\n" << key_event.to_string() << "\n";
         }
 
         ~Sandbox() 

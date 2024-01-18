@@ -1,6 +1,8 @@
 #pragma once
 
-#include <bakara/math/base.h>
+#include <bakara/core/base.h>
+#include <bkpch.h>
+#include <bakara/core/string_fmt.h>
 
 namespace Bk {
     enum class EventType 
@@ -33,11 +35,13 @@ namespace Bk {
         MouseButtonEvent = BIT_SHIFT(4)
     };
 
-    #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
-								virtual EventType GetEventType() const override { return GetStaticType(); }\
-								virtual const char* GetName() const override { return #type; }
+    #define EVENT_CLASS_TYPE(type) static EventType get_static_type() { return EventType::type; }\
+								virtual EventType get_event_type() const override { return get_static_type(); }\
+								virtual const char* get_name() const override { return #type; }
 
-    #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+    #define EVENT_CLASS_CATEGORY(category) virtual int get_category_flags() const override { return (int)EventCategory::category; }
+
+    #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return format(str, __VA_ARGS__); }
 
     class Event 
     {
@@ -46,27 +50,40 @@ namespace Bk {
 
             bool handled = false;
 
-            virtual EventType GetEventType() const = 0;
-            virtual const char* GetName() const = 0;
-            virtual int GetCategoryFlags() const = 0;
-            virtual std::string ToString() const { return GetName(); }
+            virtual EventType get_event_type() const = 0;
+            virtual const char* get_name() const = 0;
+            virtual int get_category_flags() const = 0;
+            
+            virtual std::string to_string() const { return get_name(); }
 
-            bool IsInCategory(EventCategory category)
+            bool is_in_category(EventCategory category)
             {
-                return GetCategoryFlags() & (int)category == GetCategoryFlags();
+                return get_category_flags() & (int)category == get_category_flags();
             }
     };
-    inline std::ostream& operator<<(std::ostream& os, Event& e);
 
+    inline std::ostream& operator<<(std::ostream& os, Event& e)  
+    {
+        return os << e.to_string();
+    }
 
 	class EventDispatcher
 	{
         public:
-            EventDispatcher(Event& event);
+            EventDispatcher(Event& event)
+            : p_event(event) {}
             
             // F will be deduced by the compiler
             template<typename T, typename F>
-            bool Dispatch(const F& func);
+            bool dispatch(const F& func)
+            {
+                if (p_event.get_event_type() == T::get_static_type())
+                {
+                    p_event.handled |= func(static_cast<T&>(p_event));
+                    return true;
+                }
+                return false;
+            }
         private:
             Event& p_event;
 	};
