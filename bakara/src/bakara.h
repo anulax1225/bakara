@@ -7,6 +7,6 @@
 #include <bakara/events/key_event.h>
 #include <bakara/events/window_event.h>
 #include <bakara/events/app_event.h>
-#include <bakara/core/key_codes.h>
+#include <bakara/core/io_codes.h>
 
 #include <bakara/core/entry.h>

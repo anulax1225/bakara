@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <bakara/core/key_codes.h>
+#include <bakara/core/io_codes.h>
 #include "event.h"
 
 namespace Bk {
