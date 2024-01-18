@@ -13,11 +13,11 @@ namespace Bk {
         public:
             static void init();
 
-            static std::shared_ptr<spdlog::logger>& get_core_logger() { return core_logger; }
-            static std::shared_ptr<spdlog::logger>& get_app_logger() { return app_logger; }
+            static std::shared_ptr<spdlog::logger>& get_core_logger() { return p_core_logger; }
+            static std::shared_ptr<spdlog::logger>& get_app_logger() { return p_app_logger; }
         private:
-            static std::shared_ptr<spdlog::logger> core_logger;
-            static std::shared_ptr<spdlog::logger> app_logger;
+            static std::shared_ptr<spdlog::logger> p_core_logger;
+            static std::shared_ptr<spdlog::logger> p_app_logger;
 	};
 
     #define BK_CORE_TRACE(...)    ::Bk::Log::get_core_logger()->trace(__VA_ARGS__)
