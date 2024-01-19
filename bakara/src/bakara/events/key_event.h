@@ -10,7 +10,7 @@ namespace Bk {
         public:
             KeyCode get_key() const { return m_key; }
 
-            EVENT_CLASS_CATEGORY(KeyboardEvent)
+            EVENT_CLASS_CATEGORY(KeyboardCategory | InputCategory)
 
         protected: 
             KeyEvent(const KeyCode key)

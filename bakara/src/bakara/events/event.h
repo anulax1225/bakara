@@ -25,21 +25,21 @@ namespace Bk {
         MouseScroll
     };
 
-    enum class EventCategory 
+    enum EventCategory 
     {
         None = 0,
-        AppEvent = BIT_SHIFT(0),
-        InputEvent = BIT_SHIFT(1),
-        KeyboardEvent = BIT_SHIFT(2),
-        MouseEvent = BIT_SHIFT(3),
-        MouseButtonEvent = BIT_SHIFT(4)
+        AppCategory = BIT_SHIFT(0),
+        InputCategory = BIT_SHIFT(1),
+        KeyboardCategory = BIT_SHIFT(2),
+        MouseCategory = BIT_SHIFT(3),
+        MouseButtonCategory = BIT_SHIFT(4)
     };
 
     #define EVENT_CLASS_TYPE(type) static EventType get_static_type() { return EventType::type; }\
 								virtual EventType get_event_type() const override { return get_static_type(); }\
-								virtual const char* get_name() const override { return #type; }
+								virtual const char* get_name() const override { return BK_STRINGIFY(type); }
 
-    #define EVENT_CLASS_CATEGORY(category) virtual int get_category_flags() const override { return (int)EventCategory::category; }
+    #define EVENT_CLASS_CATEGORY(category) virtual int get_category_flags() const override { return category; }
 
     #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return format(str, __VA_ARGS__); }
 

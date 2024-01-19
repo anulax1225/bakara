@@ -8,7 +8,7 @@ namespace Bk {
         AppTickEvent() = default;
 
         EVENT_CLASS_TYPE(AppTick)
-        EVENT_CLASS_CATEGORY(AppEvent)
+        EVENT_CLASS_CATEGORY(AppCategory)
     };   
 
     class AppRenderEvent : public Event 
@@ -16,7 +16,7 @@ namespace Bk {
         AppRenderEvent() = default;
 
         EVENT_CLASS_TYPE(AppRender)
-        EVENT_CLASS_CATEGORY(AppEvent)
+        EVENT_CLASS_CATEGORY(AppCategory)
     };
 
     class AppUpdateEvent : public Event 
@@ -24,6 +24,6 @@ namespace Bk {
         AppUpdateEvent() = default;
 
         EVENT_CLASS_TYPE(AppUpdate)
-        EVENT_CLASS_CATEGORY(AppEvent)
+        EVENT_CLASS_CATEGORY(AppCategory)
     };
 }

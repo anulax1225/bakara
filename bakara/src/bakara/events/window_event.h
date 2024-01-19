@@ -17,7 +17,7 @@ namespace Bk {
             EVENT_STRINGIFY("WindowResizeEvent : %d %d", p_width, p_height)
 
             EVENT_CLASS_TYPE(WindowResize)
-            EVENT_CLASS_CATEGORY(AppEvent)
+            EVENT_CLASS_CATEGORY(AppCategory)
 
         private: 
             uint p_width;
@@ -29,6 +29,6 @@ namespace Bk {
         WindowCloseEvent() = default;
 
         EVENT_CLASS_TYPE(WindowClose)
-        EVENT_CLASS_CATEGORY(AppEvent)
+        EVENT_CLASS_CATEGORY(AppCategory)
     };
 }
