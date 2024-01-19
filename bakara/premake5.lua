@@ -24,3 +24,34 @@ project "bakara"
     {
         "glm"
     }
+
+filter "configurations:Debug"
+    defines 
+    { 
+        "BK_DEBUG",
+        "DEBUG"
+    }
+    runtime "Debug"
+    symbols "on"
+
+
+filter "configurations:Release"
+    defines 
+    { 
+        "BK_RELEASE",
+        "NDEBUG"
+    }
+    runtime "Release"
+    optimize "on"
+
+filter "system:windows"
+    defines 
+    { 
+        "BK_PLATFORM_WINDOWS" 
+    }
+
+filter "system:linux"
+    defines 
+    { 
+        "BK_PLATFORM_LINUX" 
+    }

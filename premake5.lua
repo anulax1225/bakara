@@ -3,6 +3,11 @@ workspace "Bakara"
     configurations { "Debug", "Release" }
     startproject "sandbox"
 
+    flags
+	{
+		"MultiProcessorCompile"
+	}
+
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 IncludeDirs = {}
