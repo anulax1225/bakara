@@ -7,6 +7,12 @@ project "bakara"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+    defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
+	}
+
     files 
     {
         "src/**.h",
@@ -17,41 +23,43 @@ project "bakara"
     {
         "%{IncludeDirs.bakara}",
         "%{IncludeDirs.glm}",
-        "%{IncludeDirs.spdlog}"
+        "%{IncludeDirs.spdlog}",
+        "%{IncludeDirs.glfw}"
     }
 
     links 
     {
-        "glm"
+        "glm",
+        "glfw"
     }
 
-filter "configurations:Debug"
-    defines 
-    { 
-        "BK_DEBUG",
-        "DEBUG"
-    }
-    runtime "Debug"
-    symbols "on"
+    filter "configurations:Debug"
+        defines 
+        { 
+            "BK_DEBUG",
+            "DEBUG"
+        }
+        runtime "Debug"
+        symbols "on"
 
 
-filter "configurations:Release"
-    defines 
-    { 
-        "BK_RELEASE",
-        "NDEBUG"
-    }
-    runtime "Release"
-    optimize "on"
+    filter "configurations:Release"
+        defines 
+        { 
+            "BK_RELEASE",
+            "NDEBUG"
+        }
+        runtime "Release"
+        optimize "on"
 
-filter "system:windows"
-    defines 
-    { 
-        "BK_PLATFORM_WINDOWS" 
-    }
+    filter "system:windows"
+        defines 
+        { 
+            "BK_PLATFORM_WINDOWS" 
+        }
 
-filter "system:linux"
-    defines 
-    { 
-        "BK_PLATFORM_LINUX" 
-    }
+    filter "system:linux"
+        defines 
+        { 
+            "BK_PLATFORM_LINUX" 
+        }
