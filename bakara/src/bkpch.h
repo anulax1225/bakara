@@ -10,3 +10,5 @@
 #include <array>
 #include <vector>
 #include <exception>
+
+#include <bakara/core/log.h>
