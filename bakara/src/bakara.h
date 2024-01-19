@@ -4,6 +4,7 @@
 #include <bakara/core/log.h>
 #include <bakara/core/application.h>
 #include <bakara/core/base.h>
+#include <bakara/core/assert.h>
 #include <bakara/core/io_codes.h>
 #include <bakara/events/event.h>
 #include <bakara/events/key_event.h>
