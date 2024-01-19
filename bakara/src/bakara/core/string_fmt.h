@@ -1,12 +1,11 @@
-#include <string>
-#include <sstream>
-#include <iostream>
+#pragma once
+
+#include <bkpch.h>
 #include <type_traits>
-#include <exception>
-#include <algorithm>
 #include <cctype>
+
 namespace Bk {
-    void format_impl(std::stringstream& ss, const char* format) { 
+    inline void format_impl(std::stringstream& ss, const char* format) { 
         while (*format) {
             if (*format == '%' && *++format != '%') // %% == % (not a format directive)
                 throw std::invalid_argument("not enough arguments !\n");
@@ -47,9 +46,10 @@ namespace Bk {
     }
 
     template <typename... Args>
-    std::string format(const char* fmt, Args... args) {
+    inline std::string format(const char* fmt, Args... args) {
         std::stringstream ss;
         format_impl(ss, fmt, args...);
         return ss.str();
     }
 }
+
