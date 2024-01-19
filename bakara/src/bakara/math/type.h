@@ -1,12 +1,12 @@
 #pragma once
 #include <bakara/math/mathpch.h>
 
-namespace Bk::Math 
+namespace Bk
 {
-    typedef unsigned int uint;
-    typedef glm::vec2 Vec2;
-    typedef glm::vec3 Vec3;
-    typedef glm::vec4 Vec4;
-    typedef glm::mat4 Mat4;
-    typedef glm::mat3 Mat3;   
+    using uint = unsigned int;
+    using Vec2 = glm::vec2;
+    using Vec3 = glm::vec3;
+    using Vec4 = glm::vec4;
+    using Mat3 = glm::mat3;
+    using Mat4 = glm::mat4;   
 }
