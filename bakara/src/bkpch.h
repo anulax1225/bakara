@@ -12,3 +12,5 @@
 #include <exception>
 
 #include <bakara/core/log.h>
+#include <bakara/core/assert.h>
+#include <bakara/math/type.h>
