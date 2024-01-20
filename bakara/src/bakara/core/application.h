@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bkpch.h>
+#include "window.h"
 
 namespace Bk {
     class Application 
