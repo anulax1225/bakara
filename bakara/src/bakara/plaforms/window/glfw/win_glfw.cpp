@@ -60,11 +60,70 @@ namespace Bk {
                     WindowCloseEvent e;
                     data.callback(e);
                 });
-            
+            glfwSetKeyCallback(p_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+                {
+                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    switch(action)
+                    {
+                        case GLFW_PRESS:
+                            {
+                                KeyPressEvent e(key);
+                                data.callback(e);
+                            }
+                            break;
+                        case GLFW_RELEASE:
+                            {
+                                KeyReleaseEvent e(key);
+                                data.callback(e);
+                            }
+                            break;
+                        case GLFW_REPEAT:
+                            {
+                                KeyPressEvent e(key, true);
+                                data.callback(e);                            
+                            }
+                            break;
+                    }
+                });
+            glfwSetMouseButtonCallback(p_window, [](GLFWwindow* window, int button, int action, int mods)
+                {
+                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    switch(action)
+                    {
+                        case GLFW_PRESS:
+                            {
+                                MouseButtonPressEvent e(button);
+                                data.callback(e);
+                            }
+                            break;
+                        case GLFW_RELEASE:
+                            {
+                                MouseButtonReleaseEvent e(button);
+                                data.callback(e);
+                            }
+                            break;
+                    }
+                });
+            glfwSetScrollCallback(p_window, [](GLFWwindow* window, double offset_x, double offset_y)
+                {
+
+                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    MouseScrollEvent e((float)offset_x, (float)offset_y);
+                    data.callback(e);
+                });
+            glfwSetCursorPosCallback(p_window, [](GLFWwindow* window, double pos_x, double pos_y)
+                {
+
+                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    MouseMoveEvent e((float)pos_x, (float)pos_y);
+                    data.callback(e);
+                });
         }
 
         void WinGLFW::on_update()  
         {
+            glClearColor(1,0,0.5,1);
+            glClear(GL_COLOR_BUFFER_BIT);
             glfwPollEvents();
             glfwSwapBuffers(p_window);
         }
