@@ -13,17 +13,21 @@ project "sandbox"
         "src/**.cpp"
     }
 
+    buildoptions 
+    {
+        "-Wall"
+    }
+
     includedirs 
     {
         "%{IncludeDirs.bakara}",
         "%{IncludeDirs.spdlog}",
         "%{IncludeDirs.glm}",
-        ""
     }
 
     links 
     {
-        "bakara"
+        "bakara",
     }
 
 

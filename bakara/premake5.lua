@@ -1,5 +1,5 @@
 project "bakara"
-    kind "StaticLib"
+    kind "SharedLib"
     language "C++"
     cppdialect "C++17"
     staticruntime "off"
@@ -7,37 +7,34 @@ project "bakara"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-    defines
-	{
-		"_CRT_SECURE_NO_WARNINGS",
-		"GLFW_INCLUDE_NONE"
-	}
-
-    buildoptions 
-    {
-        "-lglfw",
-        "-lGL"
-    }
-
     files 
     {
         "src/**.h",
         "src/**.cpp"
     }
 
+    buildoptions 
+    {
+        "-Wall"
+    }
+
+    defines 
+    {
+        "GLFW_INCLUDE_NONE"
+    }
+
     includedirs 
     {
         "%{IncludeDirs.bakara}",
-        "%{IncludeDirs.glfw}",
         "%{IncludeDirs.glm}",
-        "%{IncludeDirs.spdlog}"
+        "%{IncludeDirs.spdlog}",
+        "%{IncludeDirs.glfw}"
     }
 
     links 
     {
-        "GLFW",
-        "opengl32.lib",
         "glm",
+        "GLFW"
     }
 
     filter "configurations:Debug"
