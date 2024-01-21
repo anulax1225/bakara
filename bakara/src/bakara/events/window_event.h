@@ -1,7 +1,6 @@
 #pragma once
 
 #include <bkpch.h>
-#include <format>
 #include "event.h"
 
 namespace Bk {
