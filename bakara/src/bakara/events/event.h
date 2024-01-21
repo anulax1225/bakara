@@ -58,7 +58,7 @@ namespace Bk {
 
             bool is_in_category(EventCategory category)
             {
-                return get_category_flags() & (int)category == get_category_flags();
+                return (get_category_flags() & (int)category) == get_category_flags();
             }
     };
 
