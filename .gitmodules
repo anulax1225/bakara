@@ -7,9 +7,3 @@
 [submodule "bakara/vendor/glfw"]
 	path = bakara/vendor/glfw
 	url = https://github.com/glfw/glfw
-[submodule "bakara/vendor/SDL2"]
-	path = bakara/vendor/SDL2
-	url = https://github.com/anulax1225/SDL2
-[submodule "bakara/vendor/SDL"]
-	path = bakara/vendor/SDL
-	url = https://github.com/anulax1225/sdl
