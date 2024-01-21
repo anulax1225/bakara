@@ -25,9 +25,11 @@ namespace Bk {
 
     class WindowCloseEvent : public Event 
     {
-        WindowCloseEvent() = default;
+        public:
+            WindowCloseEvent() = default;
 
-        EVENT_CLASS_TYPE(WindowClose)
-        EVENT_CLASS_CATEGORY(AppCategory)
+            EVENT_CLASS_TYPE(WindowClose)
+            EVENT_CLASS_CATEGORY(AppCategory)
+            EVENT_STRINGIFY("Window closing%s", ".")
     };
 }

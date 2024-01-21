@@ -40,8 +40,16 @@ namespace Bk {
 								virtual const char* get_name() const override { return BK_STRINGIFY(type); }
 
     #define EVENT_CLASS_CATEGORY(category) virtual int get_category_flags() const override { return category; }
+    
+    #ifdef BK_DEBUG
+        #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return format(str, __VA_ARGS__); }
 
-    #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return format(str, __VA_ARGS__); }
+        #define EVENT_STRING(event) event.to_string()
+    #else 
+        #define EVENT_STRINGIFY(str, ...) 
+
+        #define EVENT_STRING(event)
+    #endif
 
     class Event 
     {
@@ -61,11 +69,6 @@ namespace Bk {
                 return (get_category_flags() & (int)category) == get_category_flags();
             }
     };
-
-    inline std::ostream& operator<<(std::ostream& os, Event& e)  
-    {
-        return os << e.to_string();
-    }
 
 	class EventDispatcher
 	{
