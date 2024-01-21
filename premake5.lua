@@ -8,6 +8,8 @@ workspace "Bakara"
 		"MultiProcessorCompile"
 	}
 
+    linkgroups "On"
+
 outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
 
 IncludeDirs = {}

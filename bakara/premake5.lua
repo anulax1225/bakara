@@ -13,6 +13,12 @@ project "bakara"
 		"GLFW_INCLUDE_NONE"
 	}
 
+    buildoptions 
+    {
+        "-lglfw",
+        "-lGL"
+    }
+
     files 
     {
         "src/**.h",
@@ -22,15 +28,16 @@ project "bakara"
     includedirs 
     {
         "%{IncludeDirs.bakara}",
+        "%{IncludeDirs.glfw}",
         "%{IncludeDirs.glm}",
-        "%{IncludeDirs.spdlog}",
-        "%{IncludeDirs.glfw}"
+        "%{IncludeDirs.spdlog}"
     }
 
     links 
     {
+        "GLFW",
+        "opengl32.lib",
         "glm",
-        "glfw"
     }
 
     filter "configurations:Debug"

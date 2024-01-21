@@ -1,4 +1,5 @@
 #include "win_glfw.h"
+
 namespace Bk {
     std::unique_ptr<Window> Window::create_window(const WindowPros& props)
     {
