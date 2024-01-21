@@ -2,7 +2,6 @@
 
 #include <bakara/math/type.h>
 #include <bakara/core/log.h>
-#include <bakara/core/application.h>
 #include <bakara/core/base.h>
 #include <bakara/core/assert.h>
 #include <bakara/core/io_codes.h>
@@ -11,5 +10,7 @@
 #include <bakara/events/mouse_event.h>
 #include <bakara/events/window_event.h>
 #include <bakara/events/app_event.h>
+
+#include <bakara/core/application.h>
 
 #include <bakara/core/entry.h>
