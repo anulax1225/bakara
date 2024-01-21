@@ -17,7 +17,7 @@ else
     echo Caching bin/bin-int dirs
 fi
 
-premake5 gmake2
+premake5 gmake
 make $1
 echo ================
 echo [FINISHED BUILD]
