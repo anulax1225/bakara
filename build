@@ -3,14 +3,14 @@ echo ==================
 echo [BUILDING PROJECT]
 echo ==================
 
-if [ -z ${CLEAR_BIN} ]; then 
-    CLEAR_BIN=0
+if [ -z ${clearbin} ]; then 
+    clearbin=0
 fi
-if [ -z ${AUTO_EXEC} ]; then 
-    AUTO_EXEC=0
+if [ -z ${autoexec} ]; then 
+    autoexec=0
 fi
 
-if [ 1 -eq ${CLEAR_BIN} ]; then
+if [ 1 -eq ${clearbin} ]; then
     echo Clearing bin/bin-int dirs
     rm -rf bin bin-int
 else 
@@ -22,7 +22,7 @@ make $1
 echo ================
 echo [FINISHED BUILD]
 echo ================
-if [ 1 -eq ${AUTO_EXEC} ]; then
+if [ 1 -eq ${autoexec} ]; then
     config=$1
     if [ -z "$config" ]; then 
         config="config=debug"
