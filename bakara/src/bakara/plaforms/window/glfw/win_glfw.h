@@ -1,6 +1,10 @@
 #pragma once
 #include <bkpch.h>
 #include <bakara/core/window.h>
+#include <bakara/events/mouse_event.h>
+#include <bakara/events/key_event.h>
+#include <bakara/events/window_event.h>
+#include <bakara/events/event.h>
 #include <GLFW/glfw3.h>
 
 
@@ -33,6 +37,8 @@ namespace Bk::Plaform {
             };
             WindowData p_data;
             
+            void init_event_callbacks();
+            void init(const WindowPros& props);
             void shutdown();
     };
 }

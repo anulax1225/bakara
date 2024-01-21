@@ -16,6 +16,16 @@ namespace Bk {
 
         WinGLFW::WinGLFW(const WindowPros& props) 
         {
+            init(props);
+        }
+
+        WinGLFW::~WinGLFW() 
+        {
+            shutdown();
+        }
+
+        void WinGLFW::init(const WindowPros& props)
+        {
             p_data.title = props.title;
             p_data.width = props.width;
             p_data.height = props.height;
@@ -31,11 +41,26 @@ namespace Bk {
             glfwMakeContextCurrent(p_window);
             glfwSetWindowUserPointer(p_window, &p_data);
             set_vsync(true);
+
+            init_event_callbacks();
         }
 
-        WinGLFW::~WinGLFW() 
+        void WinGLFW::init_event_callbacks()
         {
-            shutdown();
+            glfwSetFramebufferSizeCallback(p_window, [](GLFWwindow* window, int width, int height)
+                {
+                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    WindowResizeEvent e((uint)width, (uint)height);
+                    data.callback(e);
+                });
+
+            glfwSetWindowCloseCallback(p_window, [](GLFWwindow* window)
+                {
+                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    WindowCloseEvent e;
+                    data.callback(e);
+                });
+            
         }
 
         void WinGLFW::on_update()  
