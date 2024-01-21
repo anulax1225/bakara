@@ -52,21 +52,6 @@ project "GLFW"
 			"%{prj.location}/src/linux_joystick.c"
 		}
 
-		links 
-		{
-			"GL",
-			"GLU",
-			"glut",
-			"Xxf86vm",
-			"Xinerama",
-			"Xi",
-			"dl",
-			"X11",
-			"Xrandr",
-			"Xcursor",
-			"pthread"
-		}
-
 		defines
 		{
 			"_GLFW_X11"

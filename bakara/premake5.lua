@@ -15,12 +15,7 @@ project "bakara"
 
     buildoptions 
     {
-        "-Wall"
-    }
-
-    defines 
-    {
-        "GLFW_INCLUDE_NONE"
+        "-Wall",
     }
 
     includedirs 
@@ -62,8 +57,19 @@ project "bakara"
             "BK_PLATFORM_WINDOWS" 
         }
 
+        links
+        {
+            "opengl32.lib"
+        }
+
     filter "system:linux"
         defines 
         { 
             "BK_PLATFORM_LINUX" 
         }
+
+        links 
+        {
+            "GL"
+        }
+
