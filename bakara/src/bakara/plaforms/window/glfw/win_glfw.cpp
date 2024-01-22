@@ -21,7 +21,7 @@ namespace Bk {
 
         WinGLFW::~WinGLFW() 
         {
-            shutdown();
+            close();
         }
 
         void WinGLFW::init(const WindowPros& props)
@@ -53,7 +53,6 @@ namespace Bk {
                     WindowResizeEvent e((uint)width, (uint)height);
                     data.callback(e);
                 });
-
             glfwSetWindowCloseCallback(p_window, [](GLFWwindow* window)
                 {
                     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -145,7 +144,7 @@ namespace Bk {
             return p_data.vsync;
         }
 
-        void WinGLFW::shutdown()
+        void WinGLFW::close()
         {
             glfwDestroyWindow(p_window);
         }

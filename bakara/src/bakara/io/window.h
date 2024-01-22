@@ -18,7 +18,7 @@ namespace Bk {
     {
         public: 
             using EventCallback = std::function<void(Event& e)>;
-            virtual ~Window(){}
+            virtual ~Window() {}
 
             virtual uint get_width() const = 0;
             virtual uint get_height() const = 0;
@@ -28,6 +28,8 @@ namespace Bk {
 
             virtual void set_vsync(bool enable) = 0;
             virtual bool is_vsync() const = 0;
+
+            virtual void close() = 0;
 
             static std::unique_ptr<Window> create_window(const WindowPros& props = WindowPros());
     };

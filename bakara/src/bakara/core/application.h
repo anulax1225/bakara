@@ -1,8 +1,8 @@
 #pragma once
 
 #include <bkpch.h>
-#include "window.h"
-#include <bakara/events/event.h>
+#include <bakara/io/window.h>
+#include <bakara/events/events.h>
 
 namespace Bk {
 
@@ -14,6 +14,8 @@ namespace Bk {
             Application();
             virtual ~Application();
             void on_event(Event& e);
+            void on_window_close(WindowCloseEvent& e);
+            void on_window_resize(WindowResizeEvent& e);
             void run();
         private:
             std::unique_ptr<Window> p_window;
