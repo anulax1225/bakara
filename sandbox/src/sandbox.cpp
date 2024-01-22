@@ -9,7 +9,8 @@ class Sandbox : public Bk::Application
     public:
         Sandbox() 
         {
-            
+            Bk::Vec2 vec(2.0f, 2.0f);
+            BK_INFO("My Vec 2 ({0}, {1})", vec.x, vec.y); 
         }
 
         ~Sandbox() 

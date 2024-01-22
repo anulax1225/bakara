@@ -5,4 +5,4 @@ bin-int/
 .vs/
 **.sln
 **Makefile
-**.vcxproj
+**.vcxproj*
