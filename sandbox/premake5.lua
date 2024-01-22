@@ -2,7 +2,6 @@ project "sandbox"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++17"
-    staticruntime "off"
     systemversion "latest"
 
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -11,11 +10,6 @@ project "sandbox"
     {
         "src/**.h",
         "src/**.cpp"
-    }
-
-    buildoptions 
-    {
-        "-Wall"
     }
 
     includedirs 
@@ -51,12 +45,14 @@ filter "configurations:Release"
     optimize "on"
 
 filter "system:windows"
+    staticruntime "on"
     defines 
     { 
         "BK_PLATFORM_WINDOWS" 
     }
 
 filter "system:linux"
+    staticruntime "off"
     defines 
     { 
         "BK_PLATFORM_LINUX" 

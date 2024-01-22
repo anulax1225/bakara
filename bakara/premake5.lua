@@ -1,21 +1,16 @@
 project "bakara"
-    kind "SharedLib"
     language "C++"
     cppdialect "C++17"
-    staticruntime "off"
 
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
     files 
     {
+        "vendor/glm/glm/**.hpp",
+        "vendor/glm/glm/**.inl",
         "src/**.h",
-        "src/**.cpp"
-    }
-
-    buildoptions 
-    {
-        "-Wall",
+        "src/**.cpp",
     }
 
     includedirs 
@@ -28,7 +23,6 @@ project "bakara"
 
     links 
     {
-        "glm",
         "GLFW"
     }
 
@@ -52,6 +46,8 @@ project "bakara"
         optimize "on"
 
     filter "system:windows"
+        kind "StaticLib"
+        staticruntime "on"
         defines 
         { 
             "BK_PLATFORM_WINDOWS" 
@@ -63,6 +59,13 @@ project "bakara"
         }
 
     filter "system:linux"
+        kind "SharedLib"
+        staticruntime "off"
+        files
+        {
+            "vendor/glm/glm/**.cpp"
+        }
+
         defines 
         { 
             "BK_PLATFORM_LINUX" 
