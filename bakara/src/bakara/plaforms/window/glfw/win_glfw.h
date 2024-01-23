@@ -1,10 +1,8 @@
 #pragma once
 #include <bkpch.h>
 #include <bakara/io/window.h>
-#include <bakara/events/mouse_event.h>
-#include <bakara/events/key_event.h>
-#include <bakara/events/window_event.h>
-#include <bakara/events/event.h>
+#include <bakara/events/events.h>
+#include <mutex>
 #include <GLFW/glfw3.h>
 
 
@@ -25,9 +23,11 @@ namespace Bk::Plaform {
             bool is_vsync() const override;
 
             void close() override;
+            void open() override;
         
         private:
             GLFWwindow* p_window;
+            bool p_shutdown;
 
             struct WindowData 
             {
@@ -40,6 +40,7 @@ namespace Bk::Plaform {
             WindowData p_data;
             
             void init_event_callbacks();
-            void init(const WindowPros& props);
+            void init();
+            void shutdown();
     };
 }

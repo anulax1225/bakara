@@ -30,7 +30,11 @@ namespace Bk {
             virtual bool is_vsync() const = 0;
 
             virtual void close() = 0;
+            virtual void open() = 0;
+            bool is_open() { return p_is_open; }
 
             static std::unique_ptr<Window> create_window(const WindowPros& props = WindowPros());
+        protected:
+            bool p_is_open;
     };
 }

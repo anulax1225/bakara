@@ -44,11 +44,11 @@ namespace Bk {
     #ifdef BK_DEBUG
         #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return format(str, __VA_ARGS__); }
 
-        #define EVENT_STRING(event) event.to_string()
+        #define GET_EVENT_STRING(event) event.to_string()
     #else 
         #define EVENT_STRINGIFY(str, ...) 
 
-        #define EVENT_STRING(event)
+        #define GET_EVENT_STRING(event) ""
     #endif
 
     class Event 

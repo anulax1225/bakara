@@ -6,7 +6,8 @@
 
 namespace Bk {
 
-    #define BK_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+    #define BK_BIND_EVENT_FN(fn) [this](Event& e) { fn(e); }
+    #define BK_BIND_DISPACHER_FN(event, fn) [this](event& e) -> bool{ return fn(e); }
 
     class Application 
     {
@@ -14,8 +15,8 @@ namespace Bk {
             Application();
             virtual ~Application();
             void on_event(Event& e);
-            void on_window_close(WindowCloseEvent& e);
-            void on_window_resize(WindowResizeEvent& e);
+            bool on_window_close(WindowCloseEvent& e);
+            bool on_window_resize(WindowResizeEvent& e);
             void run();
         private:
             std::unique_ptr<Window> p_window;

@@ -16,7 +16,10 @@ namespace Bk {
 
         WinGLFW::WinGLFW(const WindowPros& props) 
         {
-            init(props);
+            p_data.title = props.title;
+            p_data.width = props.width;
+            p_data.height = props.height;
+            init();
         }
 
         WinGLFW::~WinGLFW() 
@@ -24,20 +27,17 @@ namespace Bk {
             close();
         }
 
-        void WinGLFW::init(const WindowPros& props)
+        void WinGLFW::init()
         {
-            p_data.title = props.title;
-            p_data.width = props.width;
-            p_data.height = props.height;
-
-            BK_CORE_INFO("Creating window : {0} ({1}, {2})", props.title, props.width, props.height); 
+            p_is_open = true;
+            BK_CORE_INFO("Creating window : {0} ({1}, {2})", p_data.title, p_data.width, p_data.height); 
             if (!p_glfw_initialized++) 
             {
                 int success = glfwInit();
                 BK_MSG_ASSERT(success, "Couldn't initialize glfw!")
                 glfwSetErrorCallback(glfw_error_callback);
             }
-            p_window = glfwCreateWindow((int)props.width, (int)props.height, props.title.c_str(), nullptr, nullptr);
+            p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);
             glfwMakeContextCurrent(p_window);
             glfwSetWindowUserPointer(p_window, &p_data);
             set_vsync(true);
@@ -121,10 +121,14 @@ namespace Bk {
 
         void WinGLFW::on_update()  
         {
-            glClearColor(1,0,0.5,1);
-            glClear(GL_COLOR_BUFFER_BIT);
-            glfwPollEvents();
-            glfwSwapBuffers(p_window);
+            if (p_is_open)
+            {
+                glClearColor(1,0,0.5,1);
+                glClear(GL_COLOR_BUFFER_BIT);
+                glfwPollEvents();
+                glfwSwapBuffers(p_window);
+                if (p_shutdown && p_is_open) { shutdown(); }
+            }
         }
 
         void WinGLFW::set_event_callback(const EventCallback callback)  
@@ -134,19 +138,38 @@ namespace Bk {
 
         void WinGLFW::set_vsync(bool enable)  
         {
-            if (enable) { glfwSwapInterval(1); }
-            else { glfwSwapInterval(0); }
-            p_data.vsync = enable;
+            if (p_is_open) 
+            {
+                if (enable) { glfwSwapInterval(1); }
+                else { glfwSwapInterval(0); }
+                p_data.vsync = enable;
+            }
         }
 
         bool WinGLFW::is_vsync() const  
         {
             return p_data.vsync;
         }
+        
+        void WinGLFW::shutdown() 
+        {
+            p_is_open = false;
+            p_shutdown = false;
+            glfwDestroyWindow(p_window);
+        }
 
         void WinGLFW::close()
         {
-            glfwDestroyWindow(p_window);
+            p_shutdown = true;
         }
+
+        void WinGLFW::open()
+        {
+            if (!p_is_open) 
+            { 
+                init(); 
+            }
+        }
+
     }
 }
