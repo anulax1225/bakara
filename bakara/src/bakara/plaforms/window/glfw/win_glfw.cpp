@@ -50,7 +50,7 @@ namespace Bk {
             glfwSetFramebufferSizeCallback(p_window, [](GLFWwindow* window, int width, int height)
                 {
                     WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-                    WindowResizeEvent e((uint)width, (uint)height);
+                    WindowResizeEvent e(data.width = (uint)width, data.height = (uint)height);
                     data.callback(e);
                 });
             glfwSetWindowCloseCallback(p_window, [](GLFWwindow* window)
