@@ -12,9 +12,14 @@ namespace Bk {
     void Application::on_event(Event& e)
     {
         EventDispatcher dispatcher(e);
-        dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, on_window_close));
-		dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, on_window_resize));
-        BK_CORE_INFO("Event : {0}", GET_EVENT_STRING(e));
+        if (!(dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, on_window_close)) ||
+		dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, on_window_resize))))
+        {
+            for(auto it = layer_stack.rbegin(); it != layer_stack.rend(); it++)
+            {
+                (*it)->on_event(e);
+            }
+        }
     }
 
     bool Application::on_window_close(WindowCloseEvent& e)

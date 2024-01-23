@@ -3,6 +3,7 @@
 #include <bkpch.h>
 #include <bakara/io/window.h>
 #include <bakara/events/events.h>
+#include <bakara/core/layer_stack.h>
 
 namespace Bk {
 
@@ -17,9 +18,16 @@ namespace Bk {
             void on_event(Event& e);
             bool on_window_close(WindowCloseEvent& e);
             bool on_window_resize(WindowResizeEvent& e);
+
+            void push_overlay(Layer*  layer) { layer_stack.push_overlay(layer); }
+            std::unique_ptr<Layer> pop_overlay() { return layer_stack.pop_overlay(); }
+            void push_layer(Layer*  layer) { layer_stack.push_layer(layer); }
+            std::unique_ptr<Layer> pop_layer() { return layer_stack.pop_layer(); }
+
             void run();
         private:
             std::unique_ptr<Window> p_window;
+            LayerStack layer_stack;
             bool p_running = true;
     };
 

@@ -1,5 +1,6 @@
 #pragma once 
 #include <bkpch.h>
+#include <bakara/events/events.h>
 
 namespace Bk {
     class Layer 
@@ -10,9 +11,10 @@ namespace Bk {
 
             virtual void on_attach() {}
             virtual void on_detach() {}
-            virtual void on_event() {}
+            virtual void on_event(Event& e) {}
             virtual void on_update() {}
-        private:
+            const std::string to_string() const { return name; }
+        protected:
             std::string name;
     }; 
 }
