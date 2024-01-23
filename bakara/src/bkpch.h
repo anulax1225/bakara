@@ -9,6 +9,7 @@
 #include <sstream>
 #include <array>
 #include <vector>
+#include <deque>
 #include <exception>
 
 #include <bakara/core/log.h>
