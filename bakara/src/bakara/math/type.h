@@ -1,4 +1,34 @@
 #pragma once
+
+/*! \file type.h
+    Math types alias file used to abstract math types and not depend on any library. 
+    As long as it's implemented here. 
+*/
+
+/*! \typedef Bk::uint
+\brief Simplefied name for unsigned int
+*/
+
+/*! \typedef Bk::Vec2
+\brief Wrapper around glm::vec2
+*/
+
+/*! \typedef Bk::Vec3
+\brief Wrapper around glm::vec3
+*/
+
+/*! \typedef Bk::Vec4
+\brief Wrapper around glm::vec4
+*/
+
+/*! \typedef Bk::Mat3
+\brief Wrapper around glm::mat3
+*/
+
+/*! \typedef Bk::Mat4
+\brief Wrapper around glm::mat4
+*/
+
 #include <bakara/math/mathpch.h>
 
 namespace Bk
