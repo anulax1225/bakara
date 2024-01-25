@@ -1,5 +1,3 @@
-#pragma once
-
 #include <bkpch.h>
 #include "log.h"
 #include "application.h"
