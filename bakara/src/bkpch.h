@@ -1,5 +1,9 @@
 #pragma once
 
+/*! \file bkpch.h
+Precompiled headers communly used in bakara. 
+*/
+
 #include <iostream>
 #include <ostream>
 #include <utility>
