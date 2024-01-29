@@ -1,10 +1,15 @@
 #pragma once
 
+/*! \file string_fmt.h
+This file provides functions to do string formatting.
+*/
+
 #include <bkpch.h>
 #include <type_traits>
 #include <cctype>
 
-namespace Bk {
+namespace Bk::Tools {
+
     inline void format_impl(std::stringstream& ss, const char* format) { 
         while (*format) {
             if (*format == '%' && *++format != '%') // %% == % (not a format directive)
@@ -44,7 +49,12 @@ namespace Bk {
             } // the format string is exhausted and we still have args : throw
         throw std::invalid_argument("Too many arguments\n");
     }
-
+    /*! \fn std::string Bk::Tools::format(const char* fmt, Args... args)
+    Formats a string, printf like. Accepts integers, floating point numbers, strings, booléen.
+    @param fmt : string to format
+    @param args : variable arguments to put in the string
+    @return String formatted
+    */
     template <typename... Args>
     inline std::string format(const char* fmt, Args... args) {
         std::stringstream ss;
