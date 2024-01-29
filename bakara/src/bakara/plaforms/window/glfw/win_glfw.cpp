@@ -1,7 +1,7 @@
 #include "win_glfw.h"
 
 namespace Bk {
-    std::unique_ptr<Window> Window::create_window(const WindowPros& props)
+    std::unique_ptr<Window> Window::create_window(const WindowProps& props)
     {
         return std::unique_ptr<Window>(new Plaform::WinGLFW(props));
     }
@@ -14,7 +14,7 @@ namespace Bk {
             BK_CORE_CRITICAL("GLFW Error ({0}) {1}", error, description);
         }
 
-        WinGLFW::WinGLFW(const WindowPros& props) 
+        WinGLFW::WinGLFW(const WindowProps& props) 
         {
             p_data.title = props.title;
             p_data.width = props.width;
@@ -29,7 +29,7 @@ namespace Bk {
 
         void WinGLFW::init()
         {
-            p_is_open = true;
+            h_is_open = true;
             BK_CORE_INFO("Creating window : {0} ({1}, {2})", p_data.title, p_data.width, p_data.height); 
             if (!p_glfw_initialized++) 
             {
@@ -121,13 +121,13 @@ namespace Bk {
 
         void WinGLFW::on_update()  
         {
-            if (p_is_open)
+            if (h_is_open)
             {
                 glClearColor(1,0,0.5,1);
                 glClear(GL_COLOR_BUFFER_BIT);
                 glfwPollEvents();
                 glfwSwapBuffers(p_window);
-                if (p_shutdown && p_is_open) { shutdown(); }
+                if (p_shutdown && h_is_open) { shutdown(); }
             }
         }
 
@@ -138,7 +138,7 @@ namespace Bk {
 
         void WinGLFW::set_vsync(bool enable)  
         {
-            if (p_is_open) 
+            if (h_is_open) 
             {
                 if (enable) { glfwSwapInterval(1); }
                 else { glfwSwapInterval(0); }
@@ -153,7 +153,7 @@ namespace Bk {
         
         void WinGLFW::shutdown() 
         {
-            p_is_open = false;
+            h_is_open = false;
             p_shutdown = false;
             glfwDestroyWindow(p_window);
         }
@@ -165,7 +165,7 @@ namespace Bk {
 
         void WinGLFW::open()
         {
-            if (!p_is_open) 
+            if (!h_is_open) 
             { 
                 init(); 
             }

@@ -10,7 +10,7 @@ namespace Bk::Plaform {
     class WinGLFW : public Window
     {
         public:
-            WinGLFW(const WindowPros& props);
+            WinGLFW(const WindowProps& props);
             virtual ~WinGLFW();
 
             inline uint get_width() const override { return p_data.width; }
