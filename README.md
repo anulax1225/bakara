@@ -3,6 +3,12 @@
 ## Resume
 
 ## Generate doc
+To generate the documentation using doxygen, <a>install</a> it from there website for your plaform.
+Then write commands : 
+```bash
+	cd dirs/to/bakara  
+	doxygen
+```
 
 ## Prerequiste
 * A video/graphics card that supports OpenGL.
@@ -15,6 +21,7 @@
 ### Windows
 On windows, write commands :
 ```batch
+	cd C:\Users\username
 	git clone https://github.com/anulax/bakara
 	git submodule init
 	git submodule update
@@ -34,6 +41,7 @@ On linux (if you don't have premake5, install it with your distro's packet manag
 
 Then write commands :
 ```bash
+	cd ~/
 	git clone https://github.com/anulax/bakara
 	git submodule init
 	git submodule update

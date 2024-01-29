@@ -14,7 +14,6 @@ On windows, write commands :
 Or use visual studio 2022 to build your project.
 
 ### Linux
----
 On linux (if you don't have premake5, install it with your distro's packet manager). You have two env variable to change build proccess :
 
 | Name        | Value	    |
