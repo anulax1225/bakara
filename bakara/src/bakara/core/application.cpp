@@ -3,8 +3,8 @@
 namespace Bk {
     Application::Application() 
     { 
-        p_window = Window::create_window();
-        p_window->set_event_callback(BK_BIND_EVENT_FN(on_event));
+        h_window = Window::create_window();
+        h_window->set_event_callback(BK_BIND_EVENT_FN(on_event));
     }
 
     Application::~Application() { }
@@ -15,7 +15,7 @@ namespace Bk {
         if (!(dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, on_window_close)) ||
 		dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, on_window_resize))))
         {
-            for(auto it = layer_stack.rbegin(); it != layer_stack.rend(); it++)
+            for(auto it = p_layer_stack.rbegin(); it != p_layer_stack.rend(); it++)
             {
                 (*it)->on_event(e);
             }
@@ -24,7 +24,7 @@ namespace Bk {
 
     bool Application::on_window_close(WindowCloseEvent& e)
     {
-        p_window->close();
+        h_window->close();
 
         return true;
     }
@@ -39,8 +39,7 @@ namespace Bk {
     {
         while (p_running)
         {
-            p_window->on_update();
-            if (!p_window->is_open()) p_window->open();
+            h_window->on_update();
         }
     }
 }
