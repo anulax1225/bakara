@@ -61,13 +61,10 @@ namespace Bk {
             virtual EventType get_event_type() const = 0;
             virtual const char* get_name() const = 0;
             virtual int get_category_flags() const = 0;
-            
+        #ifdef BK_DEBUG
             virtual std::string to_string() const { return get_name(); }
-
-            bool is_in_category(EventCategory category)
-            {
-                return get_category_flags() & category;
-            }
+        #endif
+            bool is_in_category(EventCategory category) { return get_category_flags() & category; }
     };
 
 	class EventDispatcher
@@ -87,6 +84,8 @@ namespace Bk {
                 }
                 return false;
             }
+
+            inline Event& get_event() { return p_event; }
         private:
             Event& p_event;
 	};

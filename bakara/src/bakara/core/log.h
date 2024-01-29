@@ -19,18 +19,29 @@ namespace Bk {
             static std::shared_ptr<spdlog::logger> p_core_logger;
             static std::shared_ptr<spdlog::logger> p_app_logger;
 	};
+    #ifdef BK_DEBUG
+        #define BK_CORE_TRACE(...)    ::Bk::Log::get_core_logger()->trace(__VA_ARGS__)
+        #define BK_CORE_INFO(...)     ::Bk::Log::get_core_logger()->info(__VA_ARGS__)
+        #define BK_CORE_WARN(...)     ::Bk::Log::get_core_logger()->warn(__VA_ARGS__)
+        #define BK_CORE_ERROR(...)    ::Bk::Log::get_core_logger()->error(__VA_ARGS__)
+        #define BK_CORE_CRITICAL(...) ::Bk::Log::get_core_logger()->critical(__VA_ARGS__)
 
-    #define BK_CORE_TRACE(...)    ::Bk::Log::get_core_logger()->trace(__VA_ARGS__)
-    #define BK_CORE_INFO(...)     ::Bk::Log::get_core_logger()->info(__VA_ARGS__)
-    #define BK_CORE_WARN(...)     ::Bk::Log::get_core_logger()->warn(__VA_ARGS__)
-    #define BK_CORE_ERROR(...)    ::Bk::Log::get_core_logger()->error(__VA_ARGS__)
-    #define BK_CORE_CRITICAL(...) ::Bk::Log::get_core_logger()->critical(__VA_ARGS__)
+        #define BK_TRACE(...)         ::Bk::Log::get_app_logger()->trace(__VA_ARGS__)
+        #define BK_INFO(...)          ::Bk::Log::get_app_logger()->info(__VA_ARGS__)
+        #define BK_WARN(...)          ::Bk::Log::get_app_logger()->warn(__VA_ARGS__)
+        #define BK_ERROR(...)         ::Bk::Log::get_app_logger()->error(__VA_ARGS__)
+        #define BK_CRITICAL(...)      ::Bk::Log::get_app_logger()->critical(__VA_ARGS__)
+    #else
+        #define BK_CORE_TRACE(...)    
+        #define BK_CORE_INFO(...)     
+        #define BK_CORE_WARN(...)     
+        #define BK_CORE_ERROR(...)    
+        #define BK_CORE_CRITICAL(...) 
 
-    // Client log macros
-    #define BK_TRACE(...)         ::Bk::Log::get_app_logger()->trace(__VA_ARGS__)
-    #define BK_INFO(...)          ::Bk::Log::get_app_logger()->info(__VA_ARGS__)
-    #define BK_WARN(...)          ::Bk::Log::get_app_logger()->warn(__VA_ARGS__)
-    #define BK_ERROR(...)         ::Bk::Log::get_app_logger()->error(__VA_ARGS__)
-    #define BK_CRITICAL(...)      ::Bk::Log::get_app_logger()->critical(__VA_ARGS__)
-
+        #define BK_TRACE(...)         
+        #define BK_INFO(...)          
+        #define BK_WARN(...)          
+        #define BK_ERROR(...)         
+        #define BK_CRITICAL(...)       
+    #endif
 }
