@@ -24,14 +24,11 @@ namespace Bk {
 
     bool Application::on_window_close(WindowCloseEvent& e)
     {
-        h_window->close();
-
         return true;
     }
 
     bool Application::on_window_resize(WindowResizeEvent& e)
     {
-        BK_CORE_INFO("Event : {0}", GET_EVENT_STRING(e));
         return true;
     }
 

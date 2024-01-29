@@ -17,6 +17,9 @@ namespace Bk {
     class Application 
     {
         public:
+            /*! \fn Bk::Application
+            Initializes the main window and binds the event callback
+            */
             Application();
             /*! \fn Bk::Application::~Application
             Virtual destructor enables subclasses to cleanup on termination
@@ -73,7 +76,7 @@ namespace Bk {
             LayerStack p_layer_stack; //!< Layer stack of the application
             bool p_running = true; //!< Flag that indicates if the update loop should stop or not 
     };
-    /*! \fn Bk::create_app
+    /*! \fn std::unique_ptr<Application> Bk::create_app()
     Is used to retrive the user app class instance, made from inheritance.
     Must be defined in the user program
     @return User defined application
