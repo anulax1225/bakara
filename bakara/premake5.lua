@@ -5,6 +5,7 @@ project "bakara"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+
     files 
     {
         "vendor/glm/glm/**.hpp",
@@ -13,17 +14,25 @@ project "bakara"
         "src/**.cpp",
     }
 
+    defines
+    {
+        "_CRT_SECURE_NO_WARNINGS",
+        "GLFW_INCLUDE_NONE"
+    }
+
     includedirs 
     {
         "%{IncludeDirs.bakara}",
         "%{IncludeDirs.glm}",
         "%{IncludeDirs.spdlog}",
+        "%{IncludeDirs.glad}",
         "%{IncludeDirs.glfw}"
     }
 
     links 
     {
-        "GLFW"
+        "GLFW",
+        "GLAD"
     }
 
     filter "configurations:Debug"
@@ -61,6 +70,7 @@ project "bakara"
     filter "system:linux"
         kind "SharedLib"
         staticruntime "off"
+
         files
         {
             "vendor/glm/glm/**.cpp"
