@@ -16,12 +16,12 @@ project "sandbox"
     {
         "%{IncludeDirs.bakara}",
         "%{IncludeDirs.spdlog}",
-        "%{IncludeDirs.glm}",
+        "%{IncludeDirs.glm}"
     }
 
     links 
     {
-        "bakara",
+        "bakara"
     }
 
 

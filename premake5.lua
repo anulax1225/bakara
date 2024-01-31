@@ -19,6 +19,7 @@ IncludeDirs["spdlog"] = "%{wks.location}/bakara/vendor/spdloglib/include"
 IncludeDirs["glm"] = "%{wks.location}/bakara/vendor/glm"
 IncludeDirs["glfw"] = "%{wks.location}/bakara/vendor/glfw/include"
 IncludeDirs["glad"] = "%{wks.location}/bakara/vendor/glad/include"
+IncludeDirs["imgui"] = "%{wks.location}/bakara/vendor/imgui"
 
 
 group "Dependencies"

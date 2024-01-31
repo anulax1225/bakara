@@ -10,6 +10,9 @@ project "bakara"
     {
         "vendor/glm/glm/**.hpp",
         "vendor/glm/glm/**.inl",
+        "vendor/imgui/misc/cpp/imgui_stdlib.cpp",
+        "vendor/imgui/backends/imgui_impl_opengl3.cpp",
+        "vendor/imgui/backends/imgui_impl_glfw.cpp",
         "src/**.h",
         "src/**.cpp",
     }
@@ -17,7 +20,8 @@ project "bakara"
     defines
     {
         "_CRT_SECURE_NO_WARNINGS",
-        "GLFW_INCLUDE_NONE"
+        "GLFW_INCLUDE_NONE",
+        "IMGUI_IMPL_OPENGL_LOADER_GLAD"
     }
 
     includedirs 
@@ -26,13 +30,16 @@ project "bakara"
         "%{IncludeDirs.glm}",
         "%{IncludeDirs.spdlog}",
         "%{IncludeDirs.glad}",
-        "%{IncludeDirs.glfw}"
+        "%{IncludeDirs.glfw}",
+        "%{IncludeDirs.imgui}"
+
     }
 
     links 
     {
         "GLFW",
-        "GLAD"
+        "GLAD",
+        "ImGui"
     }
 
     filter "configurations:Debug"
