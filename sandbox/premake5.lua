@@ -52,7 +52,7 @@ filter "system:windows"
     }
 
 filter "system:linux"
-    staticruntime "off"
+    staticruntime "on"
     defines 
     { 
         "BK_PLATFORM_LINUX" 
