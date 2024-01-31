@@ -1,7 +1,5 @@
 # Bakara project
 
-## Resume
-
 ## Generate doc
 To generate the documentation using doxygen, <a>install</a> it from there website for your plaform.
 Then write commands : 
@@ -34,10 +32,10 @@ Or use visual studio 2022 to build your project.
 ---
 On linux (if you don't have premake5, install it with your distro's packet manager). You have two env variable to change build proccess :
 
-| Name        | Value	    |
-| ----------- | ----------- |
-| autoexec    | 0/1         |
-| clearbin    | 0/1         |
+| Name        | Value	    | Description |
+| ----------- | ----------- | ----------- |
+| exec        | 0/1         | Lauch app   |
+| clear       | 0/1         | Remove bin  |
 
 Then write commands :
 ```bash
@@ -45,9 +43,6 @@ Then write commands :
 	git clone https://github.com/anulax/bakara
 	git submodule init
 	git submodule update
-	(export clearbin=1 autoexec=1)
+	(export clear=1 autoexec=1)
 	./build.sh config=release
 ```
-
-## Getting started
-(to do)
