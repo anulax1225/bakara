@@ -24,6 +24,8 @@ namespace Bk {
 
     bool Application::on_window_close(WindowCloseEvent& e)
     {
+        h_window->close();
+        p_running = false;
         return true;
     }
 
