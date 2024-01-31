@@ -1,3 +1,4 @@
+#include <glad/glad.h>
 #include "win_glfw.h"
 
 namespace Bk {
@@ -39,6 +40,11 @@ namespace Bk {
             }
             p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);
             glfwMakeContextCurrent(p_window);
+
+            int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+            BK_CORE_ASSERT(success)
+
+            BK_CORE_TRACE("Opengl Raw Version : {0}",GL_VERSION);
             glfwSetWindowUserPointer(p_window, &p_data);
             set_vsync(true);
 
