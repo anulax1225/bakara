@@ -1,0 +1,38 @@
+{
+    "name": "Bakara",
+    "owner": "anulax1225",
+    "git": "https://github.com/anulax1225/bakara",
+    "links": 
+    [
+        "bakara"
+    ],
+    "includes": 
+    [
+        "bakara",
+        "spdlog",
+        "glm"
+    ],
+    "packages": 
+    [
+        {
+            "author": "gabime",
+            "name": "spdlog"
+        },
+        {
+            "author": "anulax1225",
+            "name": "glm"
+        },
+        {
+            "author": "anulax1225",
+            "name": "glfw"
+        },
+        {
+            "author": "anulax1225",
+            "name": "glad"
+        },
+        {
+            "author": "anulax1225",
+            "name": "imgui"
+        }
+    ]
+}
