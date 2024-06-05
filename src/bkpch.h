@@ -15,8 +15,6 @@ Precompiled headers communly used in bakara.
 #include <vector>
 #include <deque>
 #include <exception>
-#include <bakatools>
+#include <bakatools.h>
 
-#include <bakara/core/log.h>
-#include <bakara/core/assert.h>
 #include <bakara/math/type.h>

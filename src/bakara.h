@@ -15,7 +15,6 @@ Plaform namespace doc
 namespace Bk::Plaform {}
 
 #include <bakara/math/type.h>
-#include <bakara/core/log.h>
 #include <bakara/core/assert.h>
 #include <bakara/io/io_codes.h>
 

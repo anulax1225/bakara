@@ -1,11 +1,12 @@
 project "bakara"
+    kind "StaticLib"
     language "C++"
-    cppdialect "C++17"
+    cppdialect "C++20"
 
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-
+    buildoptions { "-fPIC" }
     files 
     {
         "%{wks.location}/vendor/glm/glm/**.hpp",
@@ -64,7 +65,6 @@ project "bakara"
         optimize "on"
 
     filter "system:windows"
-        kind "StaticLib"
         staticruntime "on"
         defines 
         { 
@@ -77,8 +77,7 @@ project "bakara"
         }
 
     filter "system:linux"
-        kind "SharedLib"
-        staticruntime "off"
+        staticruntime "on"
 
         files
         {

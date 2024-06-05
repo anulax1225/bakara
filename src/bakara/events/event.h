@@ -2,7 +2,6 @@
 
 #include <bakara/core/base.h>
 #include <bkpch.h>
-#include <bakara/tools/string_fmt.h>
 
 namespace Bk {
     enum class EventType 
@@ -42,7 +41,7 @@ namespace Bk {
     #define EVENT_CLASS_CATEGORY(category) virtual int get_category_flags() const override { return category; }
     
     #ifdef BK_DEBUG
-        #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return Tools::format(str, __VA_ARGS__); }
+        #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return Tools::string_format(str, __VA_ARGS__); }
 
         #define GET_EVENT_STRING(event) event.to_string()
     #else 
