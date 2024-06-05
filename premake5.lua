@@ -8,11 +8,11 @@ project "bakara"
 
     files 
     {
-        "vendor/glm/glm/**.hpp",
-        "vendor/glm/glm/**.inl",
-        "vendor/imgui/misc/cpp/imgui_stdlib.cpp",
-        "vendor/imgui/backends/imgui_impl_opengl3.cpp",
-        "vendor/imgui/backends/imgui_impl_glfw.cpp",
+        "%{wks.location}/vendor/glm/glm/**.hpp",
+        "%{wks.location}/vendor/glm/glm/**.inl",
+        "%{wks.location}/vendor/imgui/misc/cpp/imgui_stdlib.cpp",
+        "%{wks.location}/vendor/imgui/backends/imgui_impl_opengl3.cpp",
+        "%{wks.location}/vendor/imgui/backends/imgui_impl_glfw.cpp",
         "src/**.h",
         "src/**.cpp",
     }
@@ -80,7 +80,7 @@ project "bakara"
 
         files
         {
-            "vendor/glm/glm/**.cpp"
+            "%{wks.location}/vendor/glm/glm/**.cpp"
         }
 
         defines 
