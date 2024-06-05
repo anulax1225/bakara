@@ -21,7 +21,8 @@ project "bakara"
     {
         "_CRT_SECURE_NO_WARNINGS",
         "GLFW_INCLUDE_NONE",
-        "IMGUI_IMPL_OPENGL_LOADER_GLAD"
+        "IMGUI_IMPL_OPENGL_LOADER_GLAD",
+        "BKMOD_ALL"
     }
 
     includedirs 
@@ -31,15 +32,16 @@ project "bakara"
         "%{IncludeDirs.spdlog}",
         "%{IncludeDirs.glad}",
         "%{IncludeDirs.glfw}",
-        "%{IncludeDirs.imgui}"
-
+        "%{IncludeDirs.imgui}",
+        "%{IncludeDirs.bakatools}"
     }
 
     links 
     {
         "GLFW",
         "GLAD",
-        "ImGui"
+        "ImGui",
+        "bakatools"
     }
 
     filter "configurations:Debug"
