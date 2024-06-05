@@ -2,12 +2,17 @@ clear
 echo ==================
 echo [BUILDING PROJECT]
 echo ==================
-
+echo number of lines :
+find ./bakara/src -name *.cpp -or -name *.h -exec cat {} \; | wc -l
 if [ -z ${clear} ]; then 
     clear=0
+else 
+    clear=1
 fi
 if [ -z ${exec} ]; then 
     exec=0
+else
+    exec=1
 fi
 
 if [ 1 -eq ${clear} ]; then
@@ -16,8 +21,9 @@ if [ 1 -eq ${clear} ]; then
 else 
     echo Caching bin/bin-int dirs
 fi
-
+echo
 premake5 gmake
+echo
 make $1
 if [ $? -eq 0 ]; then
     echo Compilation Success

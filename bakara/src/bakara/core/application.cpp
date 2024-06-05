@@ -1,10 +1,15 @@
 #include "application.h"
 
 namespace Bk {
+    Application* Application::p_instance = nullptr;
+
     Application::Application() 
     { 
-        h_window = Window::create_window();
+        BK_CORE_MSG_ASSERT(p_instance == nullptr, "Application already exists, can not create two application.")
+        Application::p_instance = this;
+        h_window = std::shared_ptr<Window>(Window::create_window());
         h_window->set_event_callback(BK_BIND_EVENT_FN(on_event));
+        p_running = true;
     }
 
     Application::~Application() { }

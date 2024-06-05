@@ -91,12 +91,14 @@ namespace Bk {
             */
             bool is_open() { return h_is_open; }
 
+            virtual void* get_native_window() = 0;
+
             /*! \fn Bk::Window::create_window()
             Static function implemented in the api window class to get a window specifique api.
             If no parameter is specified, creates the window with the default settings.
             @param props : Window information
             */
-            static std::unique_ptr<Window> create_window(const WindowProps& props = WindowProps());
+            static Window* create_window(const WindowProps& props = WindowProps());
         protected:
             bool h_is_open; //!< indicaste if the window is opened or not
     };

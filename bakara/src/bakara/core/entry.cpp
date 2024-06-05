@@ -2,6 +2,10 @@
 #include "log.h"
 #include "application.h"
 
+/*! \file entry.cpp
+    This file contains the entry point of the program.
+*/
+
 /*! \fn std::unique_ptr<Bk::Application> Bk::create_app()
 External function implemented client side.
 */

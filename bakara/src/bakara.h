@@ -4,6 +4,16 @@
 Precompiled headers for external pragrams.
 */
 
+/*! \namespace Bk
+Global namespace doc
+*/
+namespace Bk {}
+
+/*! \namespace Bk::Plaform
+Plaform namespace doc
+*/
+namespace Bk::Plaform {}
+
 #include <bakara/math/type.h>
 #include <bakara/core/log.h>
 #include <bakara/core/assert.h>

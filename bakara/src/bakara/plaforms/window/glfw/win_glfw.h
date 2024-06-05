@@ -23,6 +23,8 @@ namespace Bk::Plaform {
 
             void close() override;
             void open() override;
+
+            void* get_native_window() override { return p_window; }
         
         private:
             GLFWwindow* p_window;

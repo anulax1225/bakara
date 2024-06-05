@@ -2,9 +2,9 @@
 #include "win_glfw.h"
 
 namespace Bk {
-    std::unique_ptr<Window> Window::create_window(const WindowProps& props)
+    Window* Window::create_window(const WindowProps& props)
     {
-        return std::unique_ptr<Window>(new Plaform::WinGLFW(props));
+        return new Plaform::WinGLFW(props);
     }
 
     namespace Plaform {
@@ -42,9 +42,9 @@ namespace Bk {
             glfwMakeContextCurrent(p_window);
 
             int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-            BK_CORE_ASSERT(success)
+            BK_CORE_MSG_ASSERT(success, "Couldn't load glad!")
 
-            BK_CORE_TRACE("Opengl Raw Version : {0}",GL_VERSION);
+            BK_CORE_INFO("Opengl Raw Version : {0}",GL_VERSION);
             glfwSetWindowUserPointer(p_window, &p_data);
             set_vsync(true);
 

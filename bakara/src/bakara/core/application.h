@@ -69,12 +69,17 @@ namespace Bk {
             */
             void run();
 
+            std::shared_ptr<Window> get_window() { return std::shared_ptr<Window>(h_window); }
+
+            static Application& get() { return *p_instance; }
+
         protected:
-            std::unique_ptr<Window> h_window; //!< Pointer to the main window
+            std::shared_ptr<Window> h_window; //!< Pointer to the main window
 
         private:
             LayerStack p_layer_stack; //!< Layer stack of the application
-            bool p_running = true; //!< Flag that indicates if the update loop should stop or not 
+            bool p_running; //!< Flag that indicates if the update loop should stop or not 
+            static Application* p_instance;
     };
     /*! \fn std::unique_ptr<Application> Bk::create_app()
     Is used to retrive the user app class instance, made from inheritance.
