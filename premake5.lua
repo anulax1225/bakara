@@ -46,6 +46,7 @@ project "bakara"
     }
 
     filter "configurations:Debug"
+        buildoptions { "-Wall", "-Wextra" }
         defines 
         { 
             "BK_DEBUG",
