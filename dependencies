@@ -1,5 +1,4 @@
 IncludeDirs["bakara"] = "%{wks.location}/vendor/bakara/src"
-IncludeDirs["spdlog"] = "%{wks.location}/vendor/spdlog/include"
 IncludeDirs["glm"] = "%{wks.location}/vendor/glm"
 
 group "Bakara"
