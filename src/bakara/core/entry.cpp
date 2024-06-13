@@ -15,7 +15,6 @@ Entry of the program.
 */
 int main(int argc, char** argv) {
     Bk::Log::init("Bakara");
-    BK_CORE_INFO("Bienvenue dans la sandbox {0} version {1}", "bakara", 1);
     std::unique_ptr<Bk::Application> app = Bk::create_app();
     app->run();
     return 0;
