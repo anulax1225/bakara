@@ -5,7 +5,8 @@ Math types alias file used to abstract math types and not depend on any library.
 As long as it's implemented here. 
 */
 
-#include <bakara/math/mathpch.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Bk
 {

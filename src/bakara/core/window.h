@@ -5,7 +5,7 @@ This file contiens all the interfaces to create a window.
 Implementation possible with GLFW, Win32, etc.
 */
 
-#include <bkpch.h>
+#include <bakarapch.h>
 #include <bakara/events/event.h>
 
 namespace Bk {
@@ -89,7 +89,7 @@ namespace Bk {
             Indicates if the window is opened
             @return Open flag
             */
-            bool is_open() { return h_is_open; }
+            virtual bool is_open() = 0;
 
             virtual void* get_native_window() = 0;
 
@@ -99,7 +99,5 @@ namespace Bk {
             @param props : Window information
             */
             static Window* create_window(const WindowProps& props = WindowProps());
-        protected:
-            bool h_is_open; //!< indicaste if the window is opened or not
     };
 }

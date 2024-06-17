@@ -1,6 +1,6 @@
 #pragma once
-#include <bkpch.h>
-#include <bakara/io/window.h>
+#include <bakarapch.h>
+#include <bakara/core/window.h>
 #include <bakara/events/events.h>
 #include <mutex>
 #include <GLFW/glfw3.h>
@@ -25,8 +25,13 @@ namespace Bk::Plaform {
             void open() override;
 
             void* get_native_window() override { return p_window; }
-        
+            /*! \fn Bk::Window::is_open
+            Indicates if the window is opened
+            @return Open flag
+            */
+            bool is_open() override { return h_is_open; }
         private:
+            bool h_is_open; //!< indicaste if the window is opened or not
             GLFWwindow* p_window;
             bool p_shutdown;
 

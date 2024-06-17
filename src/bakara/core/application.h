@@ -4,8 +4,8 @@
 This file contains the main app abstraction.
 */
 
-#include <bkpch.h>
-#include <bakara/io/window.h>
+#include <bakarapch.h>
+#include <bakara/core/window.h>
 #include <bakara/events/events.h>
 #include <bakara/core/layer_stack.h>
 

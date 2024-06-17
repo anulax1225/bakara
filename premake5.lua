@@ -6,6 +6,9 @@ project "bakara"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "bakarapch.h"
+    pchsource "bakarapch.cpp"
+
     files 
     {
         "%{wks.location}/vendor/glm/glm/**.hpp",
@@ -13,8 +16,11 @@ project "bakara"
         "%{wks.location}/vendor/imgui/misc/cpp/imgui_stdlib.cpp",
         "%{wks.location}/vendor/imgui/backends/imgui_impl_opengl3.cpp",
         "%{wks.location}/vendor/imgui/backends/imgui_impl_glfw.cpp",
-        "src/**.h",
-        "src/**.cpp",
+        "src/bakara/**.h",
+        "src/bakara/**.cpp",
+        "src/platforms/**.h",
+        "src/platforms/**.cpp",
+        "src/*pch.*",
     }
 
     defines

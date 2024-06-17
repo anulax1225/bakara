@@ -14,8 +14,6 @@ Plaform namespace doc
 */
 namespace Bk::Plaform {}
 
-#define BKMOD_ALL
-#include <bakatools.h>
 #include <bakara/math/type.h>
 #include <bakara/io/io_codes.h>
 
