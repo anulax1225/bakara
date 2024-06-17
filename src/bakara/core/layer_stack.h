@@ -11,9 +11,9 @@ namespace Bk {
 			~LayerStack();
 
 			void push_overlay(Layer* layer);
-			std::unique_ptr<Layer> pop_overlay();
+			void pop_overlay();
 			void push_layer(Layer* layer);
-			std::unique_ptr<Layer> pop_layer();
+			void pop_layer();
 			void clear();
 
 			std::deque<Layer*>::iterator begin() { return p_layers.begin(); }

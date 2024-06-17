@@ -7,7 +7,7 @@ namespace Bk {
     {
         public:
             Layer(const std::string& name = "Layer");
-            virtual ~Layer() {}
+            ~Layer() {}
 
             virtual void on_attach() {}
             virtual void on_detach() {}

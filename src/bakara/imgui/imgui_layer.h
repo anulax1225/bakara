@@ -13,8 +13,6 @@ namespace Bk {
 	        ImguiLayer()
 	            : Layer("Imgui") {}
 
-	        ~ImguiLayer() = default;
-
 	        void on_attach() override;
 	        void on_detach() override;
 	        void on_event(Bk::Event& e) override;

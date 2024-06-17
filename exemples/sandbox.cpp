@@ -3,10 +3,6 @@
 #include <string>
 #include <bakara.h>
 
-#include <bakara/events/events.h>
-
-//USE THE FUCKING NAMESPACE OR BREAK
-
 class TestLayer : public Bk::Layer
 {
     public:
@@ -40,19 +36,8 @@ class Sandbox : public Bk::Application
         Sandbox() 
         { 
             push_layer(new TestLayer());
-            push_layer(new TestLayer());
-            std::unique_ptr<Bk::Layer> layer = pop_overlay();
-            BK_INFO("Layer retirer et récupérer {0}", layer->to_string());
-
-        }
-
-        ~Sandbox() 
-        {
-
         }
 };
-
-
 
 std::unique_ptr<Bk::Application> Bk::create_app() {
     return std::unique_ptr<Bk::Application>(new Sandbox());

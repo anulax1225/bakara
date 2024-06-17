@@ -50,9 +50,8 @@ namespace Bk {
             inline void push_overlay(Layer*  layer) { p_layer_stack.push_overlay(layer); }
             /*! \fn Bk::Application::pop_overlay
             Pop's the layer on top of the layer stack
-            @return a unique ptr to the layer ressource
             */
-            inline std::unique_ptr<Layer> pop_overlay() { return p_layer_stack.pop_overlay(); }
+            inline void pop_overlay() { p_layer_stack.pop_overlay(); }
             /*! \fn Bk::Application::push_overlay
             Push's the layer at the bottom of the layer stack
             @param layer : Layer pointer to push
@@ -60,9 +59,8 @@ namespace Bk {
             inline void push_layer(Layer*  layer) { p_layer_stack.push_layer(layer); }
             /*! \fn Bk::Application::push_overlay
             Pop's the layer at the bottom of the layer stack
-            @return a unique ptr to the layer ressource
             */
-            inline std::unique_ptr<Layer> pop_layer() { return p_layer_stack.pop_layer(); }
+            inline void pop_layer() { p_layer_stack.pop_layer(); }
 
             /*! \fn Bk::Application::run
             Starts the application and the update loop.

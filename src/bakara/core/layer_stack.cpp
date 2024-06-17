@@ -3,12 +3,7 @@
 namespace Bk {
 	LayerStack::~LayerStack()
 	{
-		std::for_each(p_layers.begin(), p_layers.end(), [](Layer* layer)
-			{
-				layer->on_detach();
-				delete layer;
-			});
-		p_layers.clear();
+		clear();
 	}
 
 	void LayerStack::push_overlay(Layer* layer)
@@ -17,14 +12,14 @@ namespace Bk {
 		p_layers.emplace_back(layer);
 	}
 
-	std::unique_ptr<Layer> LayerStack::pop_overlay()
+	void LayerStack::pop_overlay()
 	{
 		if(auto layer = p_layers.back())
 		{ 
+			layer->on_detach();
 			p_layers.pop_back();
-			return std::make_unique<Layer>(*layer); 
+			delete layer;
 		}
-		return nullptr;
 	}
 
 	void LayerStack::push_layer(Layer* layer)
@@ -33,18 +28,23 @@ namespace Bk {
 		p_layers.emplace_front(layer);
 	}
 
-	std::unique_ptr<Layer> LayerStack::pop_layer()
+	void LayerStack::pop_layer()
 	{
 		if(auto layer = p_layers.front()) 
 		{ 
+			layer->on_detach();
 			p_layers.pop_front();
-			return std::make_unique<Layer>(*layer); 
+			delete layer;
 		}
-		return nullptr;
 	}
 
 	void LayerStack::clear()
 	{
+		std::for_each(p_layers.begin(), p_layers.end(), [](Layer* layer)
+			{
+				layer->on_detach();
+				delete layer;
+			});
 		p_layers.clear();
 	}
 }
