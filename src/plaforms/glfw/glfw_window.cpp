@@ -35,7 +35,7 @@ namespace Bk {
             if (!p_glfw_initialized++) 
             {
                 int success = glfwInit();
-                BK_MSG_ASSERT(success, "Couldn't initialize glfw!")
+                BK_CORE_MSG_ASSERT(success, "Couldn't initialize glfw!")
                 glfwSetErrorCallback(glfw_error_callback);
             }
             p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);

@@ -6,7 +6,6 @@ project "bakara"
     targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-    buildoptions { "-fPIC" }
     files 
     {
         "%{wks.location}/vendor/glm/glm/**.hpp",
@@ -39,10 +38,10 @@ project "bakara"
 
     links 
     {
+        "bakatools",
         "GLFW",
         "GLAD",
-        "ImGui",
-        "bakatools"
+        "ImGui"
     }
 
     filter "configurations:Debug"
@@ -64,8 +63,9 @@ project "bakara"
         }
         runtime "Release"
         optimize "on"
-
+        
     filter "system:windows"
+        buildoptions "/MT"
         staticruntime "on"
         defines 
         { 
@@ -79,7 +79,7 @@ project "bakara"
 
     filter "system:linux"
         staticruntime "on"
-
+        buildoptions { "-fPIC" }
         files
         {
             "%{wks.location}/vendor/glm/glm/**.cpp"
