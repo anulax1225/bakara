@@ -13,9 +13,6 @@ project "bakara"
     {
         "%{wks.location}/vendor/glm/glm/**.hpp",
         "%{wks.location}/vendor/glm/glm/**.inl",
-        "%{wks.location}/vendor/imgui/misc/cpp/imgui_stdlib.cpp",
-        "%{wks.location}/vendor/imgui/backends/imgui_impl_opengl3.cpp",
-        "%{wks.location}/vendor/imgui/backends/imgui_impl_glfw.cpp",
         "src/bakara/**.h",
         "src/bakara/**.cpp",
         "src/platforms/**.h",
@@ -27,7 +24,6 @@ project "bakara"
     {
         "_CRT_SECURE_NO_WARNINGS",
         "GLFW_INCLUDE_NONE",
-        "IMGUI_IMPL_OPENGL_LOADER_GLAD",
         "BKMOD_ALL"
     }
 

@@ -27,10 +27,15 @@ namespace Bk {
         }
     }
 
-    bool Application::on_window_close(WindowCloseEvent& e)
+    void Application::close()
     {
         h_window->close();
         p_running = false;
+    }
+
+    bool Application::on_window_close(WindowCloseEvent& e)
+    {
+        close();
         return true;
     }
 

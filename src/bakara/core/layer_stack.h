@@ -11,19 +11,19 @@ namespace Bk {
 			~LayerStack();
 
 			void push_overlay(Layer* layer);
-			void pop_overlay();
+			void pop_overlay(Layer* layer);
 			void push_layer(Layer* layer);
-			void pop_layer();
+			void pop_layer(Layer* layer);
 			void clear();
 
-			std::deque<Layer*>::iterator begin() { return p_layers.begin(); }
-			std::deque<Layer*>::iterator end() { return p_layers.end(); }
+			std::vector<Layer*>::iterator begin() { return p_layers.begin(); }
+			std::vector<Layer*>::iterator end() { return p_layers.end(); }
 
-			std::deque<Layer*>::reverse_iterator rbegin() { return p_layers.rbegin(); }
-			std::deque<Layer*>::reverse_iterator rend() { return p_layers.rend(); }
+			std::vector<Layer*>::reverse_iterator rbegin() { return p_layers.rbegin(); }
+			std::vector<Layer*>::reverse_iterator rend() { return p_layers.rend(); }
 
 		private:
-			std::deque<Layer*> p_layers;
+			std::vector<Layer*> p_layers;
 			uint p_layer_index = 0;	
 	};
 }

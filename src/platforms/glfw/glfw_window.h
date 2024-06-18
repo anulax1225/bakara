@@ -2,7 +2,6 @@
 #include <bakarapch.h>
 #include <bakara/core/window.h>
 #include <bakara/events/events.h>
-#include <mutex>
 #include <GLFW/glfw3.h>
 
 namespace Bk::Plaform {

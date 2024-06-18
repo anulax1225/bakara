@@ -51,7 +51,7 @@ namespace Bk {
             /*! \fn Bk::Application::pop_overlay
             Pop's the layer on top of the layer stack
             */
-            inline void pop_overlay() { p_layer_stack.pop_overlay(); }
+            inline void pop_overlay(Layer*  layer) { p_layer_stack.pop_overlay(layer); }
             /*! \fn Bk::Application::push_overlay
             Push's the layer at the bottom of the layer stack
             @param layer : Layer pointer to push
@@ -60,7 +60,7 @@ namespace Bk {
             /*! \fn Bk::Application::push_overlay
             Pop's the layer at the bottom of the layer stack
             */
-            inline void pop_layer() { p_layer_stack.pop_layer(); }
+            inline void pop_layer(Layer*  layer) { p_layer_stack.pop_layer(layer); }
 
             /*! \fn Bk::Application::run
             Starts the application and the update loop.
@@ -73,6 +73,11 @@ namespace Bk {
 
         protected:
             std::shared_ptr<Window> h_window; //!< Pointer to the main window
+
+            /*! \fn Bk::Application::close
+            Stops the application and the update loop without creating an event.
+            */
+            void close();
 
         private:
             LayerStack p_layer_stack; //!< Layer stack of the application

@@ -1,10 +1,7 @@
 #include "layer_stack.h"
 
 namespace Bk {
-	LayerStack::~LayerStack()
-	{
-		clear();
-	}
+	LayerStack::~LayerStack() { clear(); }
 
 	void LayerStack::push_overlay(Layer* layer)
 	{
@@ -12,29 +9,31 @@ namespace Bk {
 		p_layers.emplace_back(layer);
 	}
 
-	void LayerStack::pop_overlay()
+	void LayerStack::pop_overlay(Layer* layer)
 	{
-		if(auto layer = p_layers.back())
-		{ 
+		auto it = std::find(p_layers.begin() + p_layer_index, p_layers.end(), layer);
+		if (it != p_layers.end())
+		{
 			layer->on_detach();
-			p_layers.pop_back();
-			delete layer;
+			p_layers.erase(it);
 		}
 	}
 
 	void LayerStack::push_layer(Layer* layer)
 	{
 		layer->on_attach();
-		p_layers.emplace_front(layer);
+		p_layers.emplace(p_layers.begin() + p_layer_index, layer);
+		p_layer_index++;
 	}
 
-	void LayerStack::pop_layer()
+	void LayerStack::pop_layer(Layer* layer)
 	{
-		if(auto layer = p_layers.front()) 
-		{ 
+		auto it = std::find(p_layers.begin(), p_layers.begin() + p_layer_index, layer);
+		if (it != p_layers.begin() + p_layer_index)
+		{
 			layer->on_detach();
-			p_layers.pop_front();
-			delete layer;
+			p_layers.erase(it);
+			p_layer_index--;
 		}
 	}
 
@@ -46,5 +45,6 @@ namespace Bk {
 				delete layer;
 			});
 		p_layers.clear();
+		p_layer_index = 0;
 	}
 }

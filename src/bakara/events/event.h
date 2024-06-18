@@ -1,7 +1,9 @@
 #pragma once
 
-#include <bakara/core/base.h>
 #include <bakarapch.h>
+
+#define BK_BIND_EVENT_FN(fn) [this](Event& e) { fn(e); }
+#define BK_BIND_DISPACHER_FN(event, fn) [this](event& e) -> bool{ return fn(e); }
 
 namespace Bk {
     enum class EventType 
@@ -27,11 +29,11 @@ namespace Bk {
     enum EventCategory 
     {
         None = 0,
-        AppCategory = BIT_SHIFT(0),
-        InputCategory = BIT_SHIFT(1),
-        KeyboardCategory = BIT_SHIFT(2),
-        MouseCategory = BIT_SHIFT(3),
-        MouseButtonCategory = BIT_SHIFT(4)
+        AppCategory = BK_BIT_SHIFT(0),
+        InputCategory = BK_BIT_SHIFT(1),
+        KeyboardCategory = BK_BIT_SHIFT(2),
+        MouseCategory = BK_BIT_SHIFT(3),
+        MouseButtonCategory = BK_BIT_SHIFT(4)
     };
 
     #define EVENT_CLASS_TYPE(type) static EventType get_static_type() { return EventType::type; }\
