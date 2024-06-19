@@ -8,6 +8,7 @@ This file contains the main app abstraction.
 #include <bakara/core/window.h>
 #include <bakara/events/events.h>
 #include <bakara/core/layer_stack.h>
+#include <bakara/imgui/imgui_layer.h>
 
 namespace Bk {
     /*! \class Bk::Application
@@ -67,12 +68,13 @@ namespace Bk {
             */
             void run();
 
-            std::shared_ptr<Window> get_window() { return std::shared_ptr<Window>(h_window); }
+            Window& get_window() { return *h_window; }
 
             static Application& get() { return *p_instance; }
 
         protected:
-            std::shared_ptr<Window> h_window; //!< Pointer to the main window
+            std::unique_ptr<Window> h_window; //!< Pointer to the main window
+            ImguiLayer* imgui_layer; 
 
             /*! \fn Bk::Application::close
             Stops the application and the update loop without creating an event.

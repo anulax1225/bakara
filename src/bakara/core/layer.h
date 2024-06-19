@@ -13,6 +13,7 @@ namespace Bk {
             virtual void on_detach() {}
             virtual void on_event(Event& e) {}
             virtual void on_update() {}
+            virtual void imgui_render() {}
             const std::string to_string() const { return name; }
         protected:
             std::string name;

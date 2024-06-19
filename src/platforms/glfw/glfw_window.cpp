@@ -1,4 +1,5 @@
 #include <glad/glad.h>
+#include <string.h>
 #include "glfw_window.h"
 
 namespace Bk {
@@ -44,7 +45,11 @@ namespace Bk {
             int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
             BK_CORE_MSG_ASSERT(success, "Couldn't load glad!")
 
-            BK_CORE_INFO("Opengl Raw Version : {0}",GL_VERSION);
+            GLint majVers = 0, minVers = 0;
+            glGetIntegerv(GL_MAJOR_VERSION, &majVers);
+            glGetIntegerv(GL_MINOR_VERSION, &minVers);
+
+            BK_CORE_INFO("Opengl Version : {0}.{1}", majVers, minVers);
             glfwSetWindowUserPointer(p_window, &p_data);
             set_vsync(true);
 

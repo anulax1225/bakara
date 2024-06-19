@@ -7,7 +7,9 @@ namespace Bk {
     { 
         BK_CORE_MSG_ASSERT(p_instance == nullptr, "Application already exists, can not create two application.")
         Application::p_instance = this;
-        h_window = std::shared_ptr<Window>(Window::create_window());
+        h_window = std::unique_ptr<Window>(Window::create_window());
+        imgui_layer = new ImguiLayer();
+        push_overlay(imgui_layer);
         h_window->set_event_callback(BK_BIND_EVENT_FN(on_event));
         p_running = true;
     }
@@ -48,6 +50,14 @@ namespace Bk {
     {
         while (p_running)
         {
+            for (Layer* layer : p_layer_stack)
+                layer->on_update();
+
+            imgui_layer->begin();
+            for (Layer* layer : p_layer_stack)
+                layer->imgui_render();
+            imgui_layer->end();
+
             h_window->on_update();
         }
     }
