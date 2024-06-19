@@ -52,12 +52,12 @@ namespace Bk {
         {
             for (Layer* layer : p_layer_stack)
                 layer->on_update();
-
+            
             imgui_layer->begin();
             for (Layer* layer : p_layer_stack)
                 layer->imgui_render();
             imgui_layer->end();
-
+            
             h_window->on_update();
         }
     }

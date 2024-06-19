@@ -22,8 +22,10 @@ namespace Bk {
 
 		io.IniFilename = NULL;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;   
-		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+		io.ConfigViewportsNoAutoMerge = true;
 		
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
@@ -42,7 +44,7 @@ namespace Bk {
 		
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
-		ImGui_ImplOpenGL3_Init("#version 420");
+		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
 	void ImguiLayer::on_detach() 
