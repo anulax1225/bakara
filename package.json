@@ -32,6 +32,10 @@
         },
         {
             "author": "anulax1225",
+            "name": "imgui-docking"
+        },
+        {
+            "author": "anulax1225",
             "name": "imgui"
         }
     ]

@@ -10,10 +10,6 @@ As long as it's implemented here.
 
 namespace Bk
 {
-    /*! \typedef Bk::uint
-    Simplefied name for unsigned int
-    */
-    using uint = unsigned int;
     /*! \typedef Bk::Vec2
     Wrapper around glm::vec2
     */

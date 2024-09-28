@@ -17,4 +17,4 @@ Precompiled headers communly used in bakara.
 #include <exception>
 #include <bakatools.h>
 
-#include <bakara/math/type.h>
+#include <bakara/math/types.h>

@@ -14,7 +14,7 @@ Plaform namespace doc
 */
 namespace Bk::Plaform {}
 
-#include <bakara/math/type.h>
+#include <bakara/math/types.h>
 #include <bakara/io/io_codes.h>
 
 #include <bakara/events/events.h>

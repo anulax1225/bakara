@@ -1,7 +1,7 @@
 #pragma once
 
 #include "event.h"
-#include <bakara/math/type.h>
+#include <bakara/math/types.h>
 #include <bakara/io/io_codes.h>
 
 namespace Bk 

@@ -40,7 +40,7 @@ project "bakara"
         "bakatools",
         "GLFW",
         "GLAD",
-        "ImGui"
+        "ImGuiDocking"
     }
 
     filter "configurations:Debug"
