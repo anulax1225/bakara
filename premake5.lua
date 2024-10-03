@@ -14,14 +14,12 @@ project "bakara"
         "src/bakara/**.cpp",
         "src/platforms/**.h",
         "src/platforms/**.cpp",
-        "src/*pch.*",
     }
 
     defines
     {
         "_CRT_SECURE_NO_WARNINGS",
         "GLFW_INCLUDE_NONE",
-        "BKMOD_ALL"
     }
 
     includedirs 
@@ -40,7 +38,7 @@ project "bakara"
         "bakatools",
         "GLFW",
         "GLAD",
-        "ImGuiDocking"
+        "ImGui"
     }
 
     filter "configurations:Debug"

@@ -1,10 +1,12 @@
 #pragma once
-#include <bakarapch.h>
-#include <bakara/core/window.h>
-#include <bakara/events/events.h>
-#include <GLFW/glfw3.h>
+#include "bakara.pch"
+#include "bakara/core/window.h"
+#include "bakara/events/events.h"
+#include "platforms/opengl/opengl_context.h"
 
-namespace Bk::Plaform {
+struct GLFWwindow;
+
+namespace Bk::Platform {
     class WinGLFW : public Window
     {
         public:
@@ -31,9 +33,10 @@ namespace Bk::Plaform {
             bool is_open() override { return h_is_open; }
         private:
             bool h_is_open; //!< indicaste if the window is opened or not
-            GLFWwindow* p_window;
             bool p_shutdown;
 
+            GLFWwindow* p_window;
+            OpenglContext* context;
             struct WindowData 
             {
                 std::string title;

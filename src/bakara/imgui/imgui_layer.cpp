@@ -1,6 +1,6 @@
 #include "imgui_layer.h"
 
-#include "bakarapch.h"
+#include "bakara.pch"
 
 #include "bakara/core/application.h"
 
@@ -21,23 +21,24 @@ namespace Bk {
 		ImGuiIO& io = ImGui::GetIO(); 
 
 		io.IniFilename = NULL;
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;   
-		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
-		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
-		io.ConfigViewportsNoAutoMerge = true;
+		#if defined(BK_IMGUI_DOCKING)
+			io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;   
+			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+			io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+			io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+			io.ConfigViewportsNoAutoMerge = true;
+			// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+			ImGuiStyle& style = ImGui::GetStyle();
+			if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+			{
+				style.WindowRounding = 0.0f;
+				style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+			}
+		#endif
 		
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
-
-		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-		ImGuiStyle& style = ImGui::GetStyle();
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			style.WindowRounding = 0.0f;
-			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-		}
 
 		Application& app = Application::get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.get_window().get_native_window());
@@ -56,6 +57,9 @@ namespace Bk {
 
 	void ImguiLayer::begin()
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		Application& app = Application::get();
+		io.DisplaySize = ImVec2((float)app.get_window().get_width(), (float)app.get_window().get_height());
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -63,20 +67,17 @@ namespace Bk {
 
 	void ImguiLayer::end()
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::get();
-		io.DisplaySize = ImVec2((float)app.get_window().get_width(), (float)app.get_window().get_height());
-
 		// Rendering
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			GLFWwindow* backup_current_context = glfwGetCurrentContext();
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-			glfwMakeContextCurrent(backup_current_context);
-		}
+		#if defined(BK_IMGUI_DOCKING)
+			if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+			{
+				GLFWwindow* backup_current_context = glfwGetCurrentContext();
+				ImGui::UpdatePlatformWindows();
+				ImGui::RenderPlatformWindowsDefault();
+				glfwMakeContextCurrent(backup_current_context);
+			}
+		#endif
 	}
 }

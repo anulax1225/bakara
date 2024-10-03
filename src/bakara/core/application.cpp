@@ -19,8 +19,12 @@ namespace Bk {
     void Application::on_event(Event& e)
     {
         EventDispatcher dispatcher(e);
-        if (!(dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, on_window_close)) ||
-		dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, on_window_resize))))
+        dispatcher.dispatch<MouseButtonPressEvent>(BK_BIND_DISPACHER_FN(MouseButtonPressEvent, Mouse::button_callback));
+        dispatcher.dispatch<MouseButtonReleaseEvent>(BK_BIND_DISPACHER_FN(MouseButtonReleaseEvent, Mouse::button_callback));
+        dispatcher.dispatch<MouseScrollEvent>(BK_BIND_DISPACHER_FN(MouseScrollEvent, Mouse::wheel_callback));
+        dispatcher.dispatch<MouseMoveEvent>(BK_BIND_DISPACHER_FN(MouseMoveEvent, Mouse::cursor_callback));
+        if (!(dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, on_window_close)) 
+        || dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, on_window_resize))))
         {
             for(auto it = p_layer_stack.rbegin(); it != p_layer_stack.rend(); it++)
             {
@@ -52,12 +56,14 @@ namespace Bk {
         {
             for (Layer* layer : p_layer_stack)
                 layer->on_update();
-            
+
             imgui_layer->begin();
             for (Layer* layer : p_layer_stack)
                 layer->imgui_render();
             imgui_layer->end();
             
+
+
             h_window->on_update();
         }
     }

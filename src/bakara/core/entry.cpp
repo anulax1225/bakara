@@ -1,4 +1,4 @@
-#include <bakarapch.h>
+#include "bakara.pch"
 #include "application.h"
 
 /*! \file entry.cpp

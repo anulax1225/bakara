@@ -1,14 +1,16 @@
-#include <glad/glad.h>
-#include <string.h>
 #include "glfw_window.h"
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <string.h>
 
 namespace Bk {
     Window* Window::create_window(const WindowProps& props)
     {
-        return new Plaform::WinGLFW(props);
+        return new Platform::WinGLFW(props);
     }
 
-    namespace Plaform {
+    namespace Platform {
         static uint p_glfw_initialized = 0;
 
         static void glfw_error_callback(int error, const char* description) 
@@ -26,6 +28,7 @@ namespace Bk {
 
         WinGLFW::~WinGLFW() 
         {
+            delete context;
             close();
         }
 
@@ -40,16 +43,8 @@ namespace Bk {
                 glfwSetErrorCallback(glfw_error_callback);
             }
             p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);
-            glfwMakeContextCurrent(p_window);
-
-            int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-            BK_CORE_MSG_ASSERT(success, "Couldn't load glad!")
-
-            GLint majVers = 0, minVers = 0;
-            glGetIntegerv(GL_MAJOR_VERSION, &majVers);
-            glGetIntegerv(GL_MINOR_VERSION, &minVers);
-
-            BK_CORE_INFO("Opengl Version : {0}.{1}", majVers, minVers);
+            context = new OpenglContext(p_window);
+            context->init();
             glfwSetWindowUserPointer(p_window, &p_data);
             set_vsync(true);
 
@@ -132,12 +127,10 @@ namespace Bk {
 
         void WinGLFW::on_update()  
         {
+            glfwPollEvents();
+            context->swap_buffers();
             if (h_is_open)
             {
-                glClearColor(1,0,0.5,1);
-                glClear(GL_COLOR_BUFFER_BIT);
-                glfwPollEvents();
-                glfwSwapBuffers(p_window);
                 if (p_shutdown && h_is_open) { shutdown(); }
             }
         }
