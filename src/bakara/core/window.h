@@ -20,7 +20,7 @@ namespace Bk {
         uint height; //!< Height of the window
 
         /*! \fn Bk::WindowProps::WindowProps
-        Default window is initialized with a width of 1000 and a height 800
+        Default window is Initialized with a width of 1000 and a height 800
         @param title : Title of the window
         @param width : Width of the window
         @param height : Height of the window
@@ -47,57 +47,57 @@ namespace Bk {
             */
             virtual ~Window() {}
 
-            /*! \fn Bk::Window::get_width
+            /*! \fn Bk::Window::GetWidth
             @return The width of the window
             */
-            virtual uint get_width() const = 0;
-            /*! \fn Bk::Window::get_height
+            virtual uint GetWidth() const = 0;
+            /*! \fn Bk::Window::GetHeight
             @return The height of the window
             */
-            virtual uint get_height() const = 0;
+            virtual uint GetHeight() const = 0;
             
-            /*! \fn Bk::Window::on_update
+            /*! \fn Bk::Window::OnUpdate
             Updates the frame of the window
             */
-            virtual void on_update() = 0;
-            /*! \fn Bk::Window::set_event_callback
+            virtual void OnUpdate() = 0;
+            /*! \fn Bk::Window::SetEventCallback
             Sets the function pointer for events of the window
             @param callback : function called when a new event occures
             */
-            virtual void set_event_callback(const EventCallback callback) = 0;
+            virtual void SetEventCallback(const EventCallback callback) = 0;
 
-            /*! \fn Bk::Window::set_vsync
+            /*! \fn Bk::Window::SetVsync
             Sets the window buffer swap interval. Is enabled by default. 
             If set to false the frame rate should be more constant, but more slow. 
             */
-            virtual void set_vsync(bool enable) = 0;
-            /*! \fn Bk::Window::is_vsync
+            virtual void SetVsync(bool enable) = 0;
+            /*! \fn Bk::Window::IsVsync
             Indicates if window is vsync
             @return Vsync flag
             */
-            virtual bool is_vsync() const = 0;
+            virtual bool IsVsync() const = 0;
 
-            /*! \fn Bk::Window::close
+            /*! \fn Bk::Window::Close
             Closes the window    
             */
-            virtual void close() = 0;
-            /*! \fn Bk::Window::open
-            Opens and initializes the window
+            virtual void Close() = 0;
+            /*! \fn Bk::Window::Open
+            Opens and Initializes the window
             */
-            virtual void open() = 0;
-            /*! \fn Bk::Window::is_open
-            Indicates if the window is opened
+            virtual void Open() = 0;
+            /*! \fn Bk::Window::IsOpen
+            Indicates if the window is Opened
             @return Open flag
             */
-            virtual bool is_open() = 0;
+            virtual bool IsOpen() = 0;
 
-            virtual void* get_native_window() = 0;
+            virtual void* GetNativeWindow() = 0;
 
-            /*! \fn Bk::Window::create_window()
+            /*! \fn Bk::Window::CreateWindow()
             Static function implemented in the api window class to get a window specifique api.
             If no parameter is specified, creates the window with the default settings.
             @param props : Window information
             */
-            static Window* create_window(const WindowProps& props = WindowProps());
+            static Window* CreateWindow(const WindowProps& props = WindowProps());
     };
 }

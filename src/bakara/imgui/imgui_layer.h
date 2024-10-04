@@ -10,9 +10,9 @@ namespace Bk {
 	        ImguiLayer()
 	            : Layer("Imgui") {}
 
-	        void on_attach() override;
-	        void on_detach() override;
-	        void begin();
-	        void end();
+	        void OnAttach() override;
+	        void OnDetach() override;
+	        void Begin();
+	        void End();
 	};
 }

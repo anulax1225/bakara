@@ -3,35 +3,35 @@
 namespace Bk {
 	LayerStack::~LayerStack() { clear(); }
 
-	void LayerStack::push_overlay(Layer* layer)
+	void LayerStack::PushOverlay(Layer* layer)
 	{
-		layer->on_attach();
+		layer->OnAttach();
 		p_layers.emplace_back(layer);
 	}
 
-	void LayerStack::pop_overlay(Layer* layer)
+	void LayerStack::PopOverlay(Layer* layer)
 	{
 		auto it = std::find(p_layers.begin() + p_layer_index, p_layers.end(), layer);
 		if (it != p_layers.end())
 		{
-			layer->on_detach();
+			layer->OnDetach();
 			p_layers.erase(it);
 		}
 	}
 
-	void LayerStack::push_layer(Layer* layer)
+	void LayerStack::PushLayer(Layer* layer)
 	{
-		layer->on_attach();
+		layer->OnAttach();
 		p_layers.emplace(p_layers.begin() + p_layer_index, layer);
 		p_layer_index++;
 	}
 
-	void LayerStack::pop_layer(Layer* layer)
+	void LayerStack::PopLayer(Layer* layer)
 	{
 		auto it = std::find(p_layers.begin(), p_layers.begin() + p_layer_index, layer);
 		if (it != p_layers.begin() + p_layer_index)
 		{
-			layer->on_detach();
+			layer->OnDetach();
 			p_layers.erase(it);
 			p_layer_index--;
 		}
@@ -41,7 +41,7 @@ namespace Bk {
 	{
 		std::for_each(p_layers.begin(), p_layers.end(), [](Layer* layer)
 			{
-				layer->on_detach();
+				layer->OnDetach();
 				delete layer;
 			});
 		p_layers.clear();

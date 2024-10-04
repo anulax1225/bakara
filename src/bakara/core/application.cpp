@@ -7,64 +7,66 @@ namespace Bk {
     { 
         BK_CORE_MSG_ASSERT(p_instance == nullptr, "Application already exists, can not create two application.")
         Application::p_instance = this;
-        h_window = std::unique_ptr<Window>(Window::create_window());
+        h_window = std::unique_ptr<Window>(Window::CreateWindow());
         imgui_layer = new ImguiLayer();
-        push_overlay(imgui_layer);
-        h_window->set_event_callback(BK_BIND_EVENT_FN(on_event));
+        PushOverlay(imgui_layer);
+        h_window->SetEventCallback(BK_BIND_EVENT_FN(OnEvent));
         p_running = true;
     }
 
     Application::~Application() { }
 
-    void Application::on_event(Event& e)
+    void Application::OnEvent(Event& e)
     {
         EventDispatcher dispatcher(e);
-        dispatcher.dispatch<MouseButtonPressEvent>(BK_BIND_DISPACHER_FN(MouseButtonPressEvent, Mouse::button_callback));
-        dispatcher.dispatch<MouseButtonReleaseEvent>(BK_BIND_DISPACHER_FN(MouseButtonReleaseEvent, Mouse::button_callback));
-        dispatcher.dispatch<MouseScrollEvent>(BK_BIND_DISPACHER_FN(MouseScrollEvent, Mouse::wheel_callback));
-        dispatcher.dispatch<MouseMoveEvent>(BK_BIND_DISPACHER_FN(MouseMoveEvent, Mouse::cursor_callback));
-        if (!(dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, on_window_close)) 
-        || dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, on_window_resize))))
+        dispatcher.dispatch<MouseButtonPressEvent>(BK_BIND_DISPACHER_FN(MouseButtonPressEvent, Mouse::ButtonCallback));
+        dispatcher.dispatch<MouseButtonReleaseEvent>(BK_BIND_DISPACHER_FN(MouseButtonReleaseEvent, Mouse::ButtonCallback));
+        dispatcher.dispatch<MouseScrollEvent>(BK_BIND_DISPACHER_FN(MouseScrollEvent, Mouse::WheelCallback));
+        dispatcher.dispatch<MouseMoveEvent>(BK_BIND_DISPACHER_FN(MouseMoveEvent, Mouse::CursorCallback));
+        dispatcher.dispatch<KeyPressEvent>(BK_BIND_DISPACHER_FN(KeyPressEvent, Keyboard::KeyCallback));
+        dispatcher.dispatch<KeyReleaseEvent>(BK_BIND_DISPACHER_FN(KeyReleaseEvent, Keyboard::KeyCallback));
+        if (!(dispatcher.dispatch<WindowCloseEvent>(BK_BIND_DISPACHER_FN(WindowCloseEvent, OnWindowClose)) 
+        || dispatcher.dispatch<WindowResizeEvent>(BK_BIND_DISPACHER_FN(WindowResizeEvent, OnWindowResize))))
         {
-            for(auto it = p_layer_stack.rbegin(); it != p_layer_stack.rend(); it++)
+            for(auto it = p_layer_stack.ReverseBegin(); it != p_layer_stack.ReverseEnd(); it++)
             {
-                (*it)->on_event(e);
+                (*it)->OnEvent(e);
             }
         }
     }
 
-    void Application::close()
+    void Application::Close()
     {
-        h_window->close();
+        h_window->Close();
         p_running = false;
     }
 
-    bool Application::on_window_close(WindowCloseEvent& e)
+    bool Application::OnWindowClose(WindowCloseEvent& e)
     {
-        close();
+        Close();
         return true;
     }
 
-    bool Application::on_window_resize(WindowResizeEvent& e)
+    bool Application::OnWindowResize(WindowResizeEvent& e)
     {
         return true;
     }
 
-    void Application::run() 
+    void Application::Run() 
     {
         while (p_running)
         {
             for (Layer* layer : p_layer_stack)
-                layer->on_update();
+                layer->OnUpdate();
 
-            imgui_layer->begin();
+            imgui_layer->Begin();
             for (Layer* layer : p_layer_stack)
-                layer->imgui_render();
-            imgui_layer->end();
+                layer->ImguiRender();
+            imgui_layer->End();
             
 
 
-            h_window->on_update();
+            h_window->OnUpdate();
         }
     }
 }

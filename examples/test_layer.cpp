@@ -19,12 +19,12 @@ class TestLayer : public Bk::Layer
             BK_INFO("Layer {} detached", name);
         }
 
-        void on_event(Bk::Event& e) override
+        void OnEvent(Bk::Event& e) override
         {
             BK_INFO("Layer {} event", name);
         }
 
-        void on_update() override
+        void OnUpdate() override
         {
             BK_INFO("Layer {} updated", name);
         }
@@ -35,10 +35,10 @@ class Sandbox : public Bk::Application
     public:
         Sandbox() 
         { 
-            push_layer(new TestLayer());
+            PushLayer(new TestLayer());
         }
 };
 
-std::unique_ptr<Bk::Application> Bk::create_app() {
+std::unique_ptr<Bk::Application> Bk::CreateApp() {
     return std::unique_ptr<Bk::Application>(new Sandbox());
 }

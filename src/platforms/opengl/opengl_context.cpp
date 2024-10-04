@@ -7,7 +7,7 @@ namespace Bk::Platform
     OpenglContext::OpenglContext(GLFWwindow* window_handle)
     : window_handle(window_handle) {}
 
-    void OpenglContext::init() 
+    void OpenglContext::Init() 
     {
         glfwMakeContextCurrent(window_handle);
         int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -19,7 +19,7 @@ namespace Bk::Platform
         BK_CORE_INFO("Opengl Version : {0}.{1}", majVers, minVers);
     }
 
-    void OpenglContext::swap_buffers() 
+    void OpenglContext::SwapBuffers() 
     {
         glfwSwapBuffers(window_handle);
     }

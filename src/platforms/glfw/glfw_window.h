@@ -13,27 +13,27 @@ namespace Bk::Platform {
             WinGLFW(const WindowProps& props);
             virtual ~WinGLFW();
 
-            inline uint get_width() const override { return p_data.width; }
-            inline uint get_height() const override { return p_data.height; }
+            inline uint GetWidth() const override { return p_data.width; }
+            inline uint GetHeight() const override { return p_data.height; }
         
-            void on_update() override;
-            void set_event_callback(const EventCallback callback) override;
+            void OnUpdate() override;
+            void SetEventCallback(const EventCallback callback) override;
 
-            void set_vsync(bool enable) override;
-            bool is_vsync() const override;
+            void SetVsync(bool enable) override;
+            bool IsVsync() const override;
 
-            void close() override;
-            void open() override;
+            void Close() override;
+            void Open() override;
 
-            void* get_native_window() override { return p_window; }
-            /*! \fn Bk::Window::is_open
-            Indicates if the window is opened
+            void* GetNativeWindow() override { return p_window; }
+            /*! \fn Bk::Window::IsOpen
+            Indicates if the window is Opened
             @return Open flag
             */
-            bool is_open() override { return h_is_open; }
+            bool IsOpen() override { return h_IsOpen; }
         private:
-            bool h_is_open; //!< indicaste if the window is opened or not
-            bool p_shutdown;
+            bool h_IsOpen; //!< indicaste if the window is Opened or not
+            bool p_Shutdown;
 
             GLFWwindow* p_window;
             OpenglContext* context;
@@ -47,8 +47,8 @@ namespace Bk::Platform {
             };
             WindowData p_data;
             
-            void init_event_callbacks();
-            void init();
-            void shutdown();
+            void InitEventCallbacks();
+            void Init();
+            void Shutdown();
     };
 }

@@ -5,13 +5,13 @@
 #include <string.h>
 
 namespace Bk {
-    Window* Window::create_window(const WindowProps& props)
+    Window* Window::CreateWindow(const WindowProps& props)
     {
         return new Platform::WinGLFW(props);
     }
 
     namespace Platform {
-        static uint p_glfw_initialized = 0;
+        static uint p_glfw_Initialized = 0;
 
         static void glfw_error_callback(int error, const char* description) 
         {
@@ -23,35 +23,35 @@ namespace Bk {
             p_data.title = props.title;
             p_data.width = props.width;
             p_data.height = props.height;
-            init();
+            Init();
         }
 
         WinGLFW::~WinGLFW() 
         {
             delete context;
-            close();
+            Close();
         }
 
-        void WinGLFW::init()
+        void WinGLFW::Init()
         {
-            h_is_open = true;
+            h_IsOpen = true;
             BK_CORE_INFO("Creating window : {0} ({1}, {2})", p_data.title, p_data.width, p_data.height); 
-            if (!p_glfw_initialized++) 
+            if (!p_glfw_Initialized++) 
             {
                 int success = glfwInit();
-                BK_CORE_MSG_ASSERT(success, "Couldn't initialize glfw!")
+                BK_CORE_MSG_ASSERT(success, "Couldn't Initialize glfw!")
                 glfwSetErrorCallback(glfw_error_callback);
             }
             p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);
             context = new OpenglContext(p_window);
-            context->init();
+            context->Init();
             glfwSetWindowUserPointer(p_window, &p_data);
-            set_vsync(true);
+            SetVsync(true);
 
-            init_event_callbacks();
+            InitEventCallbacks();
         }
 
-        void WinGLFW::init_event_callbacks()
+        void WinGLFW::InitEventCallbacks()
         {
             glfwSetFramebufferSizeCallback(p_window, [](GLFWwindow* window, int width, int height)
                 {
@@ -125,24 +125,24 @@ namespace Bk {
                 });
         }
 
-        void WinGLFW::on_update()  
+        void WinGLFW::OnUpdate()  
         {
             glfwPollEvents();
-            context->swap_buffers();
-            if (h_is_open)
+            context->SwapBuffers();
+            if (h_IsOpen)
             {
-                if (p_shutdown && h_is_open) { shutdown(); }
+                if (p_Shutdown && h_IsOpen) { Shutdown(); }
             }
         }
 
-        void WinGLFW::set_event_callback(const EventCallback callback)  
+        void WinGLFW::SetEventCallback(const EventCallback callback)  
         {
             p_data.callback = callback;
         }
 
-        void WinGLFW::set_vsync(bool enable)  
+        void WinGLFW::SetVsync(bool enable)  
         {
-            if (h_is_open) 
+            if (h_IsOpen) 
             {
                 if (enable) { glfwSwapInterval(1); }
                 else { glfwSwapInterval(0); }
@@ -150,28 +150,28 @@ namespace Bk {
             }
         }
 
-        bool WinGLFW::is_vsync() const  
+        bool WinGLFW::IsVsync() const  
         {
             return p_data.vsync;
         }
         
-        void WinGLFW::shutdown() 
+        void WinGLFW::Shutdown() 
         {
-            h_is_open = false;
-            p_shutdown = false;
+            h_IsOpen = false;
+            p_Shutdown = false;
             glfwDestroyWindow(p_window);
         }
 
-        void WinGLFW::close()
+        void WinGLFW::Close()
         {
-            p_shutdown = true;
+            p_Shutdown = true;
         }
 
-        void WinGLFW::open()
+        void WinGLFW::Open()
         {
-            if (!h_is_open) 
+            if (!h_IsOpen) 
             { 
-                init(); 
+                Init(); 
             }
         }
 

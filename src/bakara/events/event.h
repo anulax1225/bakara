@@ -43,9 +43,9 @@ namespace Bk {
     #define EVENT_CLASS_CATEGORY(category) virtual int get_category_flags() const override { return category; }
     
     #ifdef BK_DEBUG
-        #define EVENT_STRINGIFY(str, ...) std::string to_string() const override { return Tools::string_format(str, __VA_ARGS__); }
+        #define EVENT_STRINGIFY(str, ...) std::string ToString() const override { return Tools::string_format(str, __VA_ARGS__); }
 
-        #define GET_EVENT_STRING(event) event.to_string()
+        #define GET_EVENT_STRING(event) event.ToString()
     #else 
         #define EVENT_STRINGIFY(str, ...) 
 
@@ -63,7 +63,7 @@ namespace Bk {
             virtual const char* get_name() const = 0;
             virtual int get_category_flags() const = 0;
         #ifdef BK_DEBUG
-            virtual std::string to_string() const { return get_name(); }
+            virtual std::string ToString() const { return get_name(); }
         #endif
             bool is_in_category(EventCategory category) { return get_category_flags() & category; }
     };

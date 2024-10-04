@@ -10,17 +10,19 @@ namespace Bk {
 			LayerStack() = default;
 			~LayerStack();
 
-			void push_overlay(Layer* layer);
-			void pop_overlay(Layer* layer);
-			void push_layer(Layer* layer);
-			void pop_layer(Layer* layer);
+			void PushOverlay(Layer* layer);
+			void PopOverlay(Layer* layer);
+			void PushLayer(Layer* layer);
+			void PopLayer(Layer* layer);
 			void clear();
 
 			std::vector<Layer*>::iterator begin() { return p_layers.begin(); }
 			std::vector<Layer*>::iterator end() { return p_layers.end(); }
+			std::vector<Layer*>::iterator Begin() { return p_layers.begin(); }
+			std::vector<Layer*>::iterator End() { return p_layers.end(); }
 
-			std::vector<Layer*>::reverse_iterator rbegin() { return p_layers.rbegin(); }
-			std::vector<Layer*>::reverse_iterator rend() { return p_layers.rend(); }
+			std::vector<Layer*>::reverse_iterator ReverseBegin() { return p_layers.rbegin(); }
+			std::vector<Layer*>::reverse_iterator ReverseEnd() { return p_layers.rend(); }
 
 		private:
 			std::vector<Layer*> p_layers;

@@ -8,7 +8,7 @@ class TestLayer : public Bk::Layer
     public:
         TestLayer()
             : Layer("Test") {}
-        void imgui_render() override
+        void ImguiRender() override
         {
             static bool show = true;
             ImGui::ShowDemoWindow(&show);
@@ -21,12 +21,12 @@ class Sandbox : public Bk::Application
     public:
         Sandbox() 
         { 
-            push_layer(new TestLayer());
+            PushLayer(new TestLayer());
         }
 };
 
 
 
-std::unique_ptr<Bk::Application> Bk::create_app() {
+std::unique_ptr<Bk::Application> Bk::CreateApp() {
     return std::unique_ptr<Bk::Application>(new Sandbox());
 }

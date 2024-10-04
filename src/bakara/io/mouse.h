@@ -8,23 +8,23 @@ namespace Bk
     class Mouse {
         public:
             //GLFW callback function
-            static bool cursor_callback(MouseMoveEvent& e);
-            static bool button_callback(MouseButtonEvent& e);
-            static bool wheel_callback(MouseScrollEvent& e);
+            static bool CursorCallback(MouseMoveEvent& e);
+            static bool ButtonCallback(MouseButtonEvent& e);
+            static bool WheelCallback(MouseScrollEvent& e);
 
             //Mouse position assesors
-            static Vec2 get_position();
+            static Vec2 GetPosition();
 
             //Mouse scroll assesors
-            static double get_dx();
-            static double get_dy();
-            static double get_scroll_dx();
-            static double get_scroll_dy();
+            static double GetDX();
+            static double GetDY();
+            static double GetScrollDX();
+            static double GetScrollDY();
 
             //Mouse buttons assesors
-            static bool button(MouseCode button);
-            static bool button_up(MouseCode button);
-            static bool button_down(MouseCode button);
+            static bool Button(MouseCode button);
+            static bool ButtonUp(MouseCode button);
+            static bool ButtonDown(MouseCode button);
 
         private:
             static double x;

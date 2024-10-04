@@ -11,8 +11,8 @@ namespace Bk::Platform
     {
         public:
             OpenglContext(GLFWwindow* window_handle);
-            void init() override;
-            void swap_buffers() override;
+            void Init() override;
+            void SwapBuffers() override;
         private:
             GLFWwindow* window_handle;
     };

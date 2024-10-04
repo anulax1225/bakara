@@ -14,7 +14,7 @@
 #include <glad/glad.h>
 
 namespace Bk {
-	void ImguiLayer::on_attach() 
+	void ImguiLayer::OnAttach() 
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -40,32 +40,32 @@ namespace Bk {
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
 
-		Application& app = Application::get();
-		GLFWwindow* window = static_cast<GLFWwindow*>(app.get_window().get_native_window());
+		Application& app = Application::Get();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 		
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 420");
 	}
 
-	void ImguiLayer::on_detach() 
+	void ImguiLayer::OnDetach() 
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
 	}
 
-	void ImguiLayer::begin()
+	void ImguiLayer::Begin()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::get();
-		io.DisplaySize = ImVec2((float)app.get_window().get_width(), (float)app.get_window().get_height());
+		Application& app = Application::Get();
+		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
 
-	void ImguiLayer::end()
+	void ImguiLayer::End()
 	{
 		// Rendering
 		ImGui::Render();

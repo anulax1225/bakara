@@ -9,8 +9,8 @@ namespace Bk {
             WindowResizeEvent(uint width, uint height)
             : p_width(width), p_height(height) {};
 
-            uint get_width() const { return p_width; }
-            uint get_height() const { return p_height; }
+            uint GetWidth() const { return p_width; }
+            uint GetHeight() const { return p_height; }
 
             EVENT_STRINGIFY("WindowResizeEvent : %d %d", p_width, p_height)
 
