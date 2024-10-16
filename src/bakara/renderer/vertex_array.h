@@ -16,6 +16,6 @@ namespace Bk
 
             virtual std::vector<Ref<VertexBuffer>> GetVertexBuffers() = 0;
             virtual Ref<IndexBuffer> GetIndexbuffer() = 0;
-            static VertexArray* Create();
+            static Ref<VertexArray> Create();
     };
 }

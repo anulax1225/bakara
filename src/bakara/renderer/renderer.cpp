@@ -20,8 +20,8 @@ namespace Bk
     {
         va->Bind();
         shader->Bind();
-        shader->Set("viewProjection", sceneData->VPMatrix);
-        shader->Set("transform", transform);
+        shader->Set("u_ViewProjection", sceneData->VPMatrix);
+        shader->Set("u_Transform", transform);
         RenderCommand::DrawIndexed(va);
     } 
 }

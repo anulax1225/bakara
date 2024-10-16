@@ -12,7 +12,7 @@ namespace Bk
             virtual void Unbind() = 0;
             virtual void SetLayout(BufferLayout layout) = 0;
             virtual BufferLayout& GetLayout() = 0;
-            static VertexBuffer* Create(float* vertices, u32 size);
+            static Ref<VertexBuffer> Create(float* vertices, u32 size);
     };
     
     class IndexBuffer 
@@ -22,6 +22,6 @@ namespace Bk
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
             virtual u32 GetCount() = 0;
-            static IndexBuffer* Create(u32* indices, u32 count);
+            static Ref<IndexBuffer> Create(u32* indices, u32 count);
     };
 }

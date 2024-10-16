@@ -42,7 +42,7 @@ namespace Bk {
         void GlfwWindow::Init()
         {
             h_IsOpen = true;
-            BK_CORE_INFO("Creating window : {0} ({1}, {2})", p_data.title, p_data.width, p_data.height); 
+            BK_CORE_INFO("Creating window '{0}' ({1}, {2})", p_data.title, p_data.width, p_data.height); 
             if (!p_glfw_Initialized++) 
             {
                 int success = glfwInit();

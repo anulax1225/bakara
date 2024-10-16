@@ -10,6 +10,8 @@ project "bakara"
     {
         "%{wks.location}/vendor/glm/glm/**.hpp",
         "%{wks.location}/vendor/glm/glm/**.inl",
+        "%{wks.location}/vendor/stb/stb_image.h",
+        "%{wks.location}/vendor/stb/stb_image.cpp",
         "src/bakara/**.h",
         "src/bakara/**.cpp",
         "src/platforms/**.h",
@@ -30,7 +32,8 @@ project "bakara"
         "%{IncludeDirs.glad}",
         "%{IncludeDirs.glfw}",
         "%{IncludeDirs.imgui}",
-        "%{IncludeDirs.bakatools}"
+        "%{IncludeDirs.bakatools}",
+        "%{InlcudeDirs.stb}"
     }
 
     links 

@@ -9,7 +9,6 @@
     "includes": 
     [
         "bakara",
-        "spdlog",
         "glm"
     ],
     "packages": 
@@ -37,6 +36,10 @@
         {
             "author": "anulax1225",
             "name": "imgui"
+        },
+        {
+            "author": "anulax1225",
+            "name": "stb"
         }
     ]
 }

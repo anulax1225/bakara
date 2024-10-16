@@ -5,12 +5,14 @@
 
 namespace Bk
 {
-    VertexArray* VertexArray::Create()
+    Ref<VertexArray> VertexArray::Create()
     {
         switch (Renderer::GetAPI()) 
         {
             case Renderer::API::None: BK_MSG_ASSERT(false, "API not supported"); return nullptr;
-            case Renderer::API::Opengl: return new Platform::OpenglVertexArray();
+            case Renderer::API::Opengl: return CreateRef<Platform::OpenglVertexArray>();
         }
+        BK_MSG_ASSERT(false, "API not supported"); 
+        return nullptr;
     }
 }

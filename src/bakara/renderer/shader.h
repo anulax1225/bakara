@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "bakara/math/types.h"
+#include "bakatools/container/types.h"
 #include <string>
 
 namespace Bk
@@ -23,6 +24,6 @@ namespace Bk
             virtual void Set(const std::string name, Mat3 val) = 0;
             virtual void Set(const std::string name, Mat4 val) = 0;
 
-            static Shader* Create(std::string vertexSrc, std::string fragSrc);
+            static Ref<Shader> Create(std::string vertexSrc, std::string fragSrc);
     };
 }

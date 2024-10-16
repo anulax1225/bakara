@@ -5,12 +5,14 @@
 
 namespace Bk
 {
-    Shader* Shader::Create(std::string vertexSrc, std::string fragSrc)
+    Ref<Shader> Shader::Create(std::string vertexSrc, std::string fragSrc)
     {
         switch(Renderer::GetAPI())
         {
             case Renderer::API::None: BK_MSG_ASSERT(false, "API not supported"); return nullptr;
-            case Renderer::API::Opengl: return new Platform::OpenglShader(vertexSrc, fragSrc);
+            case Renderer::API::Opengl: return CreateRef<Platform::OpenglShader>(vertexSrc, fragSrc);
         }
+        BK_MSG_ASSERT(false, "API not supported"); 
+        return nullptr;
     }
 }

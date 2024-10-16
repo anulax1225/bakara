@@ -1,5 +1,6 @@
 IncludeDirs["bakara"] = "%{wks.location}/vendor/bakara/src"
 IncludeDirs["glm"] = "%{wks.location}/vendor/glm"
+IncludeDirs["stb"] = "%{wks.location}/vendor/stb"
 
 group "Bakara"
     include "vendor/bakara"
