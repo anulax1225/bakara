@@ -1,35 +1,34 @@
 #pragma once
 
-
-#include <bakara/io/io_codes.h>
+#include "bakara/io/key_codes.h"
 #include "event.h"
 
 namespace Bk {
     class KeyEvent : public Event 
     {
         public:
-            KeyCode get_key() const { return m_key; }
+            Code get_key() const { return m_key; }
 
             EVENT_CLASS_CATEGORY(KeyboardCategory | InputCategory)
 
         protected: 
-            KeyEvent(const KeyCode key)
+            KeyEvent(const Code key)
             : m_key(key) {}
 
-            KeyCode m_key;
+            Code m_key;
     };   
 
     class KeyPressEvent : public KeyEvent 
     {
         public:
-            KeyPressEvent(KeyCode key, bool is_repeated = false)
-            : KeyEvent(key), p_is_repeated(is_repeated) {}
+            KeyPressEvent(Code key, bool IsRepeated = false)
+            : KeyEvent(key), p_is_repeated(IsRepeated) {}
 
             EVENT_CLASS_TYPE(KeyPress)
 
             EVENT_STRINGIFY("KeyPressEvent: %d repeat : %b", m_key, p_is_repeated)
 
-            bool is_repeated() { return p_is_repeated; }
+            bool IsRepeated() { return p_is_repeated; }
 
         private: 
             bool p_is_repeated;
@@ -38,7 +37,7 @@ namespace Bk {
     class KeyReleaseEvent : public KeyEvent 
     {
         public:
-            KeyReleaseEvent(KeyCode key)
+            KeyReleaseEvent(Code key)
             : KeyEvent(key) {}
 
             EVENT_CLASS_TYPE(KeyRelease)
@@ -49,7 +48,7 @@ namespace Bk {
     class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(const KeyCode keycode)
+		KeyTypedEvent(const Code keycode)
 		: KeyEvent(keycode) {}
 
 		EVENT_CLASS_TYPE(KeyTyped)

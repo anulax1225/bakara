@@ -1,8 +1,8 @@
 #pragma once
 
+#include "bakara/io/mouse_codes.h"
 #include "event.h"
-#include <bakara/math/types.h>
-#include <bakara/io/io_codes.h>
+#include "bakara/math/types.h"
 
 namespace Bk 
 {
@@ -48,19 +48,19 @@ namespace Bk
     class MouseButtonEvent : public Event
 	{
         public:
-            MouseCode get_btn() { return m_btn; }
+            Code get_btn() { return m_btn; }
 
             EVENT_CLASS_CATEGORY(MouseCategory | InputCategory)
         protected:
-            MouseButtonEvent(MouseCode btn)
+            MouseButtonEvent(Code btn)
                 : m_btn(btn) {}
-            MouseCode m_btn;
+            Code m_btn;
 	};
 
     class MouseButtonPressEvent : public MouseButtonEvent 
     {
         public: 
-            MouseButtonPressEvent(MouseCode btn) 
+            MouseButtonPressEvent(Code btn) 
                 : MouseButtonEvent(btn) {}
             
             EVENT_STRINGIFY("MouseButtonPressEvent %d", m_btn)
@@ -70,7 +70,7 @@ namespace Bk
     class MouseButtonReleaseEvent : public MouseButtonEvent 
     {
         public: 
-            MouseButtonReleaseEvent(MouseCode btn) 
+            MouseButtonReleaseEvent(Code btn) 
                 : MouseButtonEvent(btn) {}
             
             EVENT_STRINGIFY("MouseButtonReleaseEvent %d", m_btn)

@@ -1,16 +1,24 @@
 #include "glfw_window.h"
+#include "bakara/core/deltatime.h"
+#include "bakara/events/key_event.h"
+#include "bakara/events/mouse_event.h"
+#include "bakara/events/window_event.h"
+#include "bakatools/logging/assert.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <string.h>
 
 namespace Bk {
     Window* Window::CreateWindow(const WindowProps& props)
     {
-        return new Platform::WinGLFW(props);
+        return new Platform::GlfwWindow(props);
     }
 
     namespace Platform {
+        GlfwWindowData::~GlfwWindowData()
+        {
+            delete context;
+        }
+
         static uint p_glfw_Initialized = 0;
 
         static void glfw_error_callback(int error, const char* description) 
@@ -18,7 +26,7 @@ namespace Bk {
             BK_CORE_CRITICAL("GLFW Error ({0}) {1}", error, description);
         }
 
-        WinGLFW::WinGLFW(const WindowProps& props) 
+        GlfwWindow::GlfwWindow(const WindowProps& props) 
         {
             p_data.title = props.title;
             p_data.width = props.width;
@@ -26,13 +34,12 @@ namespace Bk {
             Init();
         }
 
-        WinGLFW::~WinGLFW() 
+        GlfwWindow::~GlfwWindow() 
         {
-            delete context;
             Close();
         }
 
-        void WinGLFW::Init()
+        void GlfwWindow::Init()
         {
             h_IsOpen = true;
             BK_CORE_INFO("Creating window : {0} ({1}, {2})", p_data.title, p_data.width, p_data.height); 
@@ -43,31 +50,33 @@ namespace Bk {
                 glfwSetErrorCallback(glfw_error_callback);
             }
             p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);
-            context = new OpenglContext(p_window);
-            context->Init();
+            p_data.context = new OpenglContext(p_window);
+            p_data.context->Init();
+            p_data.context->SetViewport(p_data.width, p_data.height);
             glfwSetWindowUserPointer(p_window, &p_data);
             SetVsync(true);
 
             InitEventCallbacks();
         }
 
-        void WinGLFW::InitEventCallbacks()
+        void GlfwWindow::InitEventCallbacks()
         {
             glfwSetFramebufferSizeCallback(p_window, [](GLFWwindow* window, int width, int height)
                 {
-                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
+                    data.context->SetViewport(width, height);
                     WindowResizeEvent e(data.width = (uint)width, data.height = (uint)height);
                     data.callback(e);
                 });
             glfwSetWindowCloseCallback(p_window, [](GLFWwindow* window)
                 {
-                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
                     WindowCloseEvent e;
                     data.callback(e);
                 });
             glfwSetKeyCallback(p_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
                 {
-                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
                     switch(action)
                     {
                         case GLFW_PRESS:
@@ -92,7 +101,7 @@ namespace Bk {
                 });
             glfwSetMouseButtonCallback(p_window, [](GLFWwindow* window, int button, int action, int mods)
                 {
-                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
                     switch(action)
                     {
                         case GLFW_PRESS:
@@ -111,36 +120,38 @@ namespace Bk {
                 });
             glfwSetScrollCallback(p_window, [](GLFWwindow* window, double offset_x, double offset_y)
                 {
-
-                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
                     MouseScrollEvent e((float)offset_x, (float)offset_y);
                     data.callback(e);
                 });
             glfwSetCursorPosCallback(p_window, [](GLFWwindow* window, double pos_x, double pos_y)
                 {
 
-                    WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                    GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
                     MouseMoveEvent e((float)pos_x, (float)pos_y);
                     data.callback(e);
                 });
         }
 
-        void WinGLFW::OnUpdate()  
+        void GlfwWindow::OnUpdate()  
         {
+            float time = glfwGetTime();
+            dt = DeltaTime(time - lastFrameTime);
+            lastFrameTime = time;
             glfwPollEvents();
-            context->SwapBuffers();
+            p_data.context->SwapBuffers();
             if (h_IsOpen)
             {
                 if (p_Shutdown && h_IsOpen) { Shutdown(); }
             }
         }
 
-        void WinGLFW::SetEventCallback(const EventCallback callback)  
+        void GlfwWindow::SetEventCallback(const EventCallback callback)  
         {
             p_data.callback = callback;
         }
 
-        void WinGLFW::SetVsync(bool enable)  
+        void GlfwWindow::SetVsync(bool enable)  
         {
             if (h_IsOpen) 
             {
@@ -150,24 +161,24 @@ namespace Bk {
             }
         }
 
-        bool WinGLFW::IsVsync() const  
+        bool GlfwWindow::IsVsync() const  
         {
             return p_data.vsync;
         }
         
-        void WinGLFW::Shutdown() 
+        void GlfwWindow::Shutdown() 
         {
             h_IsOpen = false;
             p_Shutdown = false;
             glfwDestroyWindow(p_window);
         }
 
-        void WinGLFW::Close()
+        void GlfwWindow::Close()
         {
             p_Shutdown = true;
         }
 
-        void WinGLFW::Open()
+        void GlfwWindow::Open()
         {
             if (!h_IsOpen) 
             { 

@@ -4,11 +4,9 @@
 This file contains the main app abstraction.
 */
 
-#include "bakara.pch"
+#include "bakara/events/window_event.h"
+#include "bakatools/container/types.h"
 #include "bakara/core/window.h"
-#include "bakara/events/events.h"
-#include "bakara/io/mouse.h"
-#include "bakara/io/keyboard.h"
 #include "bakara/core/layer_stack.h"
 #include "bakara/imgui/imgui_layer.h"
 
@@ -23,7 +21,7 @@ namespace Bk {
             /*! \fn Bk::Application
             Initializes the main window and binds the event callback
             */
-            Application();
+            Application(std::string name = "BakaraEngine", u32 width = 1000, u32 height = 800);
             /*! \fn Bk::Application::~Application
             Virtual destructor enables subclasses to cleanup on termination
             */
@@ -93,5 +91,5 @@ namespace Bk {
     Must be defined in the user program
     @return User defined application
     */
-    std::unique_ptr<Application> CreateApp();
+    Application* CreateApp(int argc, char** argv);
 }

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "bakara.pch"
-#include "event.h"
+#include "bakara/events/event.h"
 
 namespace Bk {
 	class EventDispatcher

@@ -1,6 +1,8 @@
 #pragma once 
-#include "bakara.pch"
-#include <bakara/events/events.h>
+
+#include "bakara/core/deltatime.h"
+#include "bakara/events/event.h"
+#include <string>
 
 namespace Bk {
     class Layer 
@@ -12,7 +14,7 @@ namespace Bk {
             virtual void OnAttach() {}
             virtual void OnDetach() {}
             virtual void OnEvent(Event& e) {}
-            virtual void OnUpdate() {}
+            virtual void OnUpdate(DeltaTime dt) {}
             virtual void ImguiRender() {}
             const std::string ToString() const { return name; }
         protected:

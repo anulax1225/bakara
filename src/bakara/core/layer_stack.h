@@ -1,7 +1,7 @@
 #pragma once
 
-#include "bakara.pch"
 #include "layer.h"
+#include <vector>
 
 namespace Bk {
 	class LayerStack

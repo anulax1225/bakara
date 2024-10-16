@@ -1,18 +1,16 @@
 #pragma once
+
+#include <cstdint>
+
 namespace Bk {
 	/*! \typedef Bk::ControllerCode
 	Unsigned integer representing a unique controller button
 	*/
-	using ControllerCode = uint16_t;
-	/*! \typedef Bk::ControllerAxesCode
-	Unsigned integer representing a unique controller axe
-	*/
-	using ControllerAxes = uint16_t;
-
+	using Code = uint16_t;
 	/*! \enum Bk::ControllerButton
 	Enumerator made to bind every controller buttons with a Bk::ControllerCode
 	*/
-	typedef enum : ControllerCode
+	typedef enum : Code
 	{						
 		BTN_DOWN = 0,				//!< Cross, A
 		BTN_LEFT = 1,				//!< Square, X
@@ -37,7 +35,7 @@ namespace Bk {
 	/*! \enum Bk::ControllerJoystick
 	Enum made to bind every controller axes with a Bk::ControllerAxesCode
 	*/
-	typedef enum : ControllerAxes
+	typedef enum : Code
 	{
 		AXES_LEFT_STICK_X = 0,
 		AXES_LEFT_STICK_Y = 1,
@@ -45,5 +43,5 @@ namespace Bk {
 		AXES_LEFT_TRIGGER = 3,
 		AXES_RIGHT_TRIGGER = 4,
 		AXES_RIGHT_STICK_Y = 5,
-	} ControllerJoystick;
+	} ControllerAxes;
 }

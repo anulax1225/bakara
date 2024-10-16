@@ -5,11 +5,17 @@ Math types alias file used to abstract math types and not depend on any library.
 As long as it's implemented here. 
 */
 
+#include "glm/fwd.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Bk
 {
+    namespace Math = glm;
+
+    using Quaterion = glm::quat;
+    
     /*! \typedef Bk::Vec2
     Wrapper around glm::vec2
     */

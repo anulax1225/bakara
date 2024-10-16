@@ -1,15 +1,17 @@
 #pragma once
+#include <cstdint>
+
 namespace Bk {
 
 	/*! \typedef Bk::KeyCode
 	Unsigned integer representing a unique keyboard key
 	*/
-	using KeyCode = uint16_t;
+	using Code = uint16_t;
 
 	/*! \enum Bk::KeyCodes
 	Enumerator made to bind every keyboard keys with a Bk::KeyCode 
 	*/
-	typedef enum : KeyCode
+	typedef enum : Code
 	{
 		Space               = 32, /*!< _ */
 		Apostrophe          = 39, /*!< ' */
@@ -139,5 +141,5 @@ namespace Bk {
 		RightAlt            = 346,
 		RightSuper          = 347,
 		Menu                = 348
-	} KeyCodes;
+	} KeyCode;
 }

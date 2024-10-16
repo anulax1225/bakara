@@ -1,6 +1,8 @@
 #pragma once
 
-#include "bakara.pch"
+#include "bakatools/base.h"
+#include "bakatools/string/format.h"
+#include <string>
 
 #define BK_BIND_EVENT_FN(fn) [this](Event& e) { fn(e); }
 #define BK_BIND_DISPACHER_FN(event, fn) [this](event& e) -> bool{ return fn(e); }
@@ -67,27 +69,4 @@ namespace Bk {
         #endif
             bool is_in_category(EventCategory category) { return get_category_flags() & category; }
     };
-
-	class EventDispatcher
-	{
-        public:
-            EventDispatcher(Event& event)
-            : p_event(event) {}
-            
-            // F will be deduced by the compiler
-            template<typename T, typename F>
-            bool dispatch(const F& func)
-            {
-                if (p_event.get_event_type() == T::get_static_type())
-                {
-                    p_event.handled |= func(static_cast<T&>(p_event));
-                    return true;
-                }
-                return false;
-            }
-
-            inline Event& get_event() { return p_event; }
-        private:
-            Event& p_event;
-	};
 }

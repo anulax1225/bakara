@@ -5,8 +5,11 @@ This file contiens all the interfaces to create a window.
 Implementation possible with GLFW, Win32, etc.
 */
 
-#include "bakara.pch"
-#include <bakara/events/event.h>
+#include "bakara/core/deltatime.h"
+#include "bakara/events/event.h"
+#include "bakatools/container/types.h"
+#include <functional>
+#include <string>
 
 namespace Bk {
 
@@ -25,9 +28,15 @@ namespace Bk {
         @param width : Width of the window
         @param height : Height of the window
         */
-        WindowProps(std::string title = "Bakara engine", uint width = 1000, uint height = 800)
+        WindowProps(std::string title, u32 width, u32 height)
             : title(title), width(width), height(height) {}
     };
+
+    /*! \typedef Bk::Window::EventCallback
+    The EventCallback is a function pointer that takes a Event as parameter 
+    and that reponses to them. 
+    */
+    using EventCallback = std::function<void(Event& e)>;
 
     /*! \class Bk::Window
     Window is an interface to abstract witch window api is used. This enable compilation with multiple api, 
@@ -36,12 +45,6 @@ namespace Bk {
     class Window 
     {
         public: 
-            /*! \typedef Bk::Window::EventCallback
-            The EventCallback is a function pointer that takes a Event as parameter 
-            and that reponses to them. 
-            */
-            using EventCallback = std::function<void(Event& e)>;
-
             /*! \fn Bk::Window::~Window
             Virtual destructor enables subclasses to cleanup on termination.
             */
@@ -93,11 +96,13 @@ namespace Bk {
 
             virtual void* GetNativeWindow() = 0;
 
+            virtual DeltaTime GetTime() = 0;
+
             /*! \fn Bk::Window::CreateWindow()
             Static function implemented in the api window class to get a window specifique api.
             If no parameter is specified, creates the window with the default settings.
             @param props : Window information
             */
-            static Window* CreateWindow(const WindowProps& props = WindowProps());
+            static Window* CreateWindow(const WindowProps& props);
     };
 }
