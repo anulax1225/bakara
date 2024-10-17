@@ -33,7 +33,7 @@ project "bakara"
         "%{IncludeDirs.glfw}",
         "%{IncludeDirs.imgui}",
         "%{IncludeDirs.bakatools}",
-        "%{InlcudeDirs.stb}"
+        "%{IncludeDirs.stb}"
     }
 
     links 

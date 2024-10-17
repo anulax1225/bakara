@@ -14,8 +14,6 @@ Plaform namespace doc
 */
 namespace Bk::Plaform {}
 
-namespace Baka = Bk;
-
 #include <bakara/math/types.h>
 
 #include <bakara/io/io_codes.h>
@@ -26,10 +24,13 @@ namespace Baka = Bk;
 #include <bakara/core/layer.h>
 
 #include <bakara/renderer/cameras/ortho_camera.h>
+#include <bakara/renderer/cameras/ortho_camera_controller.h>
 
 #include <bakara/renderer/render_command.h>
 #include <bakara/renderer/renderer.h>
+#include <bakara/renderer/renderer2D.h>
 
+#include <bakara/renderer/texture.h>
 #include <bakara/renderer/buffer.h>
 #include <bakara/renderer/buffer_layout.h>
 #include <bakara/renderer/shader.h>

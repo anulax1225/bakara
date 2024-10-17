@@ -1,14 +1,26 @@
 #include "renderer.h"
 #include "bakara/renderer/cameras/ortho_camera.h"
 #include "bakara/renderer/render_command.h"
+#include "bakara/renderer/renderer2D.h"
 namespace Bk 
 {
     Renderer::API Renderer::s_RenderAPI = Renderer::API::Opengl;
-    Renderer::SceneData* Renderer::sceneData = new Renderer::SceneData();
+    Renderer::Storage* Renderer::data = new Renderer::Storage();
 
-    void Renderer::BeginScene(OrthographicCamera camera)
+    void Renderer::Init()
     {
-        sceneData->VPMatrix = camera.GetViewProjectionMatrix();
+        RenderCommand::Init();
+        Renderer2D::Init();
+    }
+
+    void Renderer::ResizeFrame(u32 width, u32 height)
+    {
+        RenderCommand::SetViewport(width, height);
+    }
+
+    void Renderer::BeginScene(const OrthoCamera& camera)
+    {
+        data->viewProjection = camera.GetViewProjection();
     }
 
     void Renderer::EndScene()
@@ -20,7 +32,7 @@ namespace Bk
     {
         va->Bind();
         shader->Bind();
-        shader->Set("u_ViewProjection", sceneData->VPMatrix);
+        shader->Set("u_ViewProjection", data->viewProjection);
         shader->Set("u_Transform", transform);
         RenderCommand::DrawIndexed(va);
     } 

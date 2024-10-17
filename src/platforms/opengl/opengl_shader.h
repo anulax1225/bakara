@@ -1,14 +1,20 @@
 #pragma once 
 
 #include "bakara/renderer/shader.h"
+#include <glad/glad.h>
+#include <string>
+#include <unordered_map>
 
 namespace Bk::Platform 
 {
     class OpenglShader : public Shader
     {
         public:
-            OpenglShader(std::string vertexSrc, std::string fragSrc);
+            OpenglShader(const std::string& filePath);
+            OpenglShader(const std::string& name, const std::string& vertexSrc, const std::string& fragSrc);
             virtual ~OpenglShader();
+
+            virtual const std::string& GetName() override { return name; } 
 
             virtual void Bind() override;
             virtual void Unbind() override;
@@ -25,5 +31,8 @@ namespace Bk::Platform
         
         private:
             unsigned int id;
+            std::string name;
+            std::unordered_map<GLenum, std::string> PreProcess(std::string source);
+            void Compile(std::unordered_map<GLenum, std::string> sources);
     };
 }

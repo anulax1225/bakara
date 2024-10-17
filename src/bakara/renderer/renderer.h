@@ -19,16 +19,20 @@ namespace Bk
         
             static API GetAPI() { return s_RenderAPI; }
 
-            static void BeginScene(OrthographicCamera camera);
+            static void Init();
+
+            static void ResizeFrame(u32 width, u32 height);
+
+            static void BeginScene(const OrthoCamera& camera);
             static void EndScene();
 
             static void Submit(Ref<VertexArray> va, Ref<Shader> shader, Mat4 transform = Mat4(1.0f));    
         private:
-            struct SceneData 
+            struct Storage 
             {
-                Mat4 VPMatrix;
+                Mat4 viewProjection;
             };
-            static SceneData* sceneData;
+            static Storage* data;
             static API s_RenderAPI;
     };
 }

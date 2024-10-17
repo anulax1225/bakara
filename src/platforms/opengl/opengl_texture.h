@@ -12,7 +12,7 @@ namespace Bk::Platform
 
             virtual u32 GetWidth() override { return width; }
             virtual u32 GetHeight() override { return height; }
-            virtual void Bind() override;
+            virtual void Bind(u32 slot = 0) override;
         private:
             u32 id;
             u32 width, height;

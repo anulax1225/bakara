@@ -6,8 +6,8 @@
 
 namespace Bk::Platform 
 {
-    OpenglContext::OpenglContext(GLFWwindow* window_handle)
-    : window_handle(window_handle) {}
+    OpenglContext::OpenglContext(void* window_handle)
+    : window_handle((GLFWwindow*)window_handle) {}
 
     void OpenglContext::Init() 
     {
@@ -29,10 +29,5 @@ namespace Bk::Platform
     void OpenglContext::SwapBuffers() 
     {
         glfwSwapBuffers(window_handle);
-    }
-
-    void OpenglContext::SetViewport(int width, int height)
-    {
-        glViewport(0, 0, width, height);
     }
 }

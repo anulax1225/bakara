@@ -15,6 +15,8 @@ namespace Bk
     namespace Math = glm;
 
     using Quaterion = glm::quat;
+
+    using Color = glm::vec4;
     
     /*! \typedef Bk::Vec2
     Wrapper around glm::vec2

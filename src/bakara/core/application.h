@@ -83,7 +83,8 @@ namespace Bk {
 
         private:
             LayerStack p_layer_stack; //!< Layer stack of the application
-            bool p_running; //!< Flag that indicates if the update loop should stop or not 
+            bool p_running = true; //!< Flag that indicates if the update loop should stop or not 
+            bool isMinimized = false;
             static Application* p_instance;
     };
     /*! \fn std::unique_ptr<Application> Bk::CreateApp()

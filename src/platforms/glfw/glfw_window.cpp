@@ -3,6 +3,7 @@
 #include "bakara/events/key_event.h"
 #include "bakara/events/mouse_event.h"
 #include "bakara/events/window_event.h"
+#include "bakara/renderer/graphics_context.h"
 #include "bakatools/logging/assert.h"
 
 #include <GLFW/glfw3.h>
@@ -14,11 +15,6 @@ namespace Bk {
     }
 
     namespace Platform {
-        GlfwWindowData::~GlfwWindowData()
-        {
-            delete context;
-        }
-
         static uint p_glfw_Initialized = 0;
 
         static void glfw_error_callback(int error, const char* description) 
@@ -41,7 +37,6 @@ namespace Bk {
 
         void GlfwWindow::Init()
         {
-            h_IsOpen = true;
             BK_CORE_INFO("Creating window '{0}' ({1}, {2})", p_data.title, p_data.width, p_data.height); 
             if (!p_glfw_Initialized++) 
             {
@@ -50,12 +45,10 @@ namespace Bk {
                 glfwSetErrorCallback(glfw_error_callback);
             }
             p_window = glfwCreateWindow((int)p_data.width, (int)p_data.height, p_data.title.c_str(), nullptr, nullptr);
-            p_data.context = new OpenglContext(p_window);
-            p_data.context->Init();
-            p_data.context->SetViewport(p_data.width, p_data.height);
+            context = GraphicsContext::Create((void*)p_window);
+            context->Init();
             glfwSetWindowUserPointer(p_window, &p_data);
             SetVsync(true);
-
             InitEventCallbacks();
         }
 
@@ -64,7 +57,6 @@ namespace Bk {
             glfwSetFramebufferSizeCallback(p_window, [](GLFWwindow* window, int width, int height)
                 {
                     GlfwWindowData& data = *(GlfwWindowData*)glfwGetWindowUserPointer(window);
-                    data.context->SetViewport(width, height);
                     WindowResizeEvent e(data.width = (uint)width, data.height = (uint)height);
                     data.callback(e);
                 });
@@ -139,11 +131,7 @@ namespace Bk {
             dt = DeltaTime(time - lastFrameTime);
             lastFrameTime = time;
             glfwPollEvents();
-            p_data.context->SwapBuffers();
-            if (h_IsOpen)
-            {
-                if (p_Shutdown && h_IsOpen) { Shutdown(); }
-            }
+            context->SwapBuffers();
         }
 
         void GlfwWindow::SetEventCallback(const EventCallback callback)  
@@ -153,38 +141,19 @@ namespace Bk {
 
         void GlfwWindow::SetVsync(bool enable)  
         {
-            if (h_IsOpen) 
-            {
-                if (enable) { glfwSwapInterval(1); }
-                else { glfwSwapInterval(0); }
-                p_data.vsync = enable;
-            }
+            if (enable) { glfwSwapInterval(1); }
+            else { glfwSwapInterval(0); }
+            p_data.vsync = enable;
         }
 
         bool GlfwWindow::IsVsync() const  
         {
             return p_data.vsync;
         }
-        
-        void GlfwWindow::Shutdown() 
-        {
-            h_IsOpen = false;
-            p_Shutdown = false;
-            glfwDestroyWindow(p_window);
-        }
 
         void GlfwWindow::Close()
         {
-            p_Shutdown = true;
+            glfwDestroyWindow(p_window);
         }
-
-        void GlfwWindow::Open()
-        {
-            if (!h_IsOpen) 
-            { 
-                Init(); 
-            }
-        }
-
     }
 }

@@ -4,25 +4,26 @@
 
 namespace Bk 
 {
-    class OrthographicCamera
+    class OrthoCamera
     {
         public:
-            OrthographicCamera(float left, float right, float bottom, float top);
+            OrthoCamera(float left, float right, float bottom, float top);
 
-            void SetPosition(Vec3 position) { this->position = position; RecalculViewMatrix(); }
-            Vec3 GetPosition() { return position; }
-            void SetRotation(float rotation) { this->rotation = rotation; RecalculViewMatrix(); }
-            float GetRotaion() { return rotation; }
+            void SetPosition(Vec3 position) { this->position = position; RecalculateView(); }
+            const Vec3& GetPosition() const { return position; }
+            void SetRotation(float rotation) { this->rotation = rotation; RecalculateView(); }
+            float GetRotaion() const { return rotation; }
 
-            Mat4 GetViewMatrix() { return viewMatrix; }
-            Mat4 GetProjectionMatrix() { return projectionMatrix; }
-            Mat4 GetViewProjectionMatrix() { return viewProjectionMatrix; }
+            const Mat4 GetView() const { return view; }
+            void SetProjection(float left, float right, float bottom, float top);
+            const Mat4 GetProjection() const { return projection; }
+            const Mat4 GetViewProjection() const { return viewProjection; }
 
         private:
-            void RecalculViewMatrix();
-            Mat4 viewMatrix;
-            Mat4 projectionMatrix;
-            Mat4 viewProjectionMatrix;
+            void RecalculateView();
+            Mat4 view;
+            Mat4 projection;
+            Mat4 viewProjection;
 
             Vec3 position = { 0.0f, 0.0f, 0.0f };
             float rotation = 0.0f;

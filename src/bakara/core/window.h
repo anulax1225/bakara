@@ -84,15 +84,6 @@ namespace Bk {
             Closes the window    
             */
             virtual void Close() = 0;
-            /*! \fn Bk::Window::Open
-            Opens and Initializes the window
-            */
-            virtual void Open() = 0;
-            /*! \fn Bk::Window::IsOpen
-            Indicates if the window is Opened
-            @return Open flag
-            */
-            virtual bool IsOpen() = 0;
 
             virtual void* GetNativeWindow() = 0;
 

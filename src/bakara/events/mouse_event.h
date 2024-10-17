@@ -12,8 +12,8 @@ namespace Bk
             MouseMoveEvent(const float x, const float y)
                 : p_mouse_x(x), p_mouse_y(y) {}
 
-            float get_x() const { return p_mouse_x; }
-            float get_y() const { return p_mouse_y; }
+            float GetX() const { return p_mouse_x; }
+            float GetY() const { return p_mouse_y; }
 
             Vec2 get_pos() const { return Vec2(p_mouse_x, p_mouse_y); }
 
@@ -33,8 +33,8 @@ namespace Bk
             MouseScrollEvent(const float x, const float y)
                 : p_dx(x), p_dy(y) {}
 
-            float get_dx() const { return p_dx; }
-            float get_dy() const { return p_dy; }
+            float GetDx() const { return p_dx; }
+            float GetDY() const { return p_dy; }
 
             EVENT_STRINGIFY("MouseScrollEvent : (%f, %f)", p_dx, p_dy)
 
@@ -48,7 +48,7 @@ namespace Bk
     class MouseButtonEvent : public Event
 	{
         public:
-            Code get_btn() { return m_btn; }
+            Code GetBtn() { return m_btn; }
 
             EVENT_CLASS_CATEGORY(MouseCategory | InputCategory)
         protected:
